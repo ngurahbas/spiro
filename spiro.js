@@ -60,8 +60,8 @@ const calculateDots = () => {
         let markerY = inY - mRadius * cosByRev(inRev);
 
         calc_revToDot.set(inRev, {
-            x: markerX,
-            y: markerY 
+            x: Math.round(markerX),
+            y: Math.round(markerY) 
         });
         if (inRev > 0 && inRev % 1 == 0 && outRev % 1 == 0) {
             calcFinished = true;
@@ -93,6 +93,32 @@ const drawCircle = (context, x, y, r) => {
     context.stroke();
 }
 
+const drawDots = (context, lastRev) => {
+    let keyIt= calc_revToDot.keys();
+    let k1 = keyIt.next().value;
+
+    // nextIt = calc_revToDot.keys().next();
+    // let pos1 = calc_revToDot.get(k1);
+    // let k2 = nextIt.value;
+    // let pos2 = calc_revToDot.get(k2);
+    // console.log(pos2);
+
+    context.beginPath();
+    let result = keyIt.next();
+    while (!result.done && result.value < lastRev) {
+        let pos1 = calc_revToDot.get(k1);
+        let k2 = result.value;
+        let pos2 = calc_revToDot.get(k2);
+
+        context.moveTo(pos1.x, pos1.y);
+        context.lineTo(pos2.x, pos2.y);
+
+        k1 = k2;
+        result = keyIt.next();
+    }
+
+    context.stroke();
+}
 
 const rps = 1;
 
@@ -125,6 +151,7 @@ const paint = (timeStamp) => {
     let markerY = inY - mRadius * cosByRev(inRev);
 
     clearCanvas(ctx);
+    drawDots(ctx, inRev); 
     drawCircle(ctx, midX, midY, outR);
     drawCircle(ctx, inX, inY, inR);
     drawCircle(ctx, markerX, markerY, 1);
