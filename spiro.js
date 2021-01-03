@@ -77,18 +77,25 @@ const paint = (timeStamp) => {
     clearCanvas(ctx);
     drawCircle(ctx, midX, midY, outR);
     drawCircle(ctx, inX, inY, inR);
-    drawCircle(ctx, markerX, markerY, 3);
+    drawCircle(ctx, markerX, markerY, 1);
 };
 
-var intPaint = setInterval(() => {window.requestAnimationFrame(paint);}, 20);
+var intPaint;
+const startOver = () => {
+    start = null;
+    intPaint = setInterval(() => {window.requestAnimationFrame(paint);}, 20); 
+};
 
 window.onload = () => {
     document.forms.userInput.oninput = () => {
         setData();
+        clearInterval(intPaint);
+        startOver();
     }
     setForm();
 
     canvas = document.getElementById("drawingCanvas");
     ctx = canvas.getContext("2d");
+    startOver();
 
 };
