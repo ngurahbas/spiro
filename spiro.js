@@ -20,11 +20,11 @@ const setData = () => {
     console.log(userInput);
 }
 
-const paint = () => {
-    console.log(intPaint);
+const paint = (timeStamp) => {
+    console.log(timeStamp);
 };
 
-var intPaint = setInterval(paint, 200);
+var intPaint = setInterval(() => {window.requestAnimationFrame(paint);}, 200);
 
 window.onload = () => {
     document.forms.userInput.oninput = () => {
