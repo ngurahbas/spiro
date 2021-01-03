@@ -19,14 +19,6 @@ const setData = () => {
     }
 }
 
-const maxR = 200;
-const midX = 250;
-const midY = 250;
-const rps = 1;
-
-var ctx;
-var canvas;
-
 const sinByRev = (rev) => {
     let calRev = rev % 1;
     let angle = calRev * Math.PI * 2;
@@ -48,6 +40,14 @@ const drawCircle = (context, x, y, r) => {
     context.arc(x, y, r, 0, Math.PI * 2);
     context.stroke();
 }
+
+const maxR = 200;
+const midX = 250;
+const midY = 250;
+const rps = 1;
+
+var ctx;
+var canvas;
 
 var start;
 var outRev = 0;
