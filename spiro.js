@@ -39,11 +39,13 @@ var calc_revToDot = new Map();
 var calc_lastCalcInRev = 0;
 var calc_lastCalcOutRev = 0;
 
-const calc_revPerCycle = 2;
+const calc_revPerCycle = 1;
 const calc_revInc = 0.01;
 const calculateDots = () => {
-    let outRev;
-    for (let inRev = calc_lastCalcInRev; inRev <= (calc_lastCalcInRev + calc_revPerCycle); inRev += calc_revInc) {
+    console.log("calculateDots");
+    let inRev,outRev;
+    let calcFinished = false;
+    for (inRev = calc_lastCalcInRev; inRev <= (calc_lastCalcInRev + calc_revPerCycle); inRev += calc_revInc) {
         inRev = Math.round(inRev*100)/100;
         outRev = inRev * (userInput.inR / userInput.outR);
 
@@ -62,15 +64,24 @@ const calculateDots = () => {
             y: markerY 
         });
         if (inRev > 0 && inRev % 1 == 0 && outRev % 1 == 0) {
+            calcFinished = true;
             break;
         }
 
     }
     calc_lastCalcInRev = inRev;
     calc_lastCalcOutRev = outRev;
+    if (!calcFinished) {
+        setTimeout(calculateDots, 5);
+    }
 };
 
-calculateDots();
+const startCalculateDots = () => {
+    calc_revToDot = new Map();
+    calc_lastCalcInRev = 0;
+    calc_lastCalcOutRev = 0;
+    calculateDots();
+};
 
 const clearCanvas = (context) => {
     context.clearRect(0, 0, canvas.width, canvas.height);
@@ -128,13 +139,15 @@ const startOver = () => {
 window.onload = () => {
     document.forms.userInput.oninput = () => {
         setData();
+        
         clearInterval(intPaint);
         startOver();
+        startCalculateDots();
     }
     setForm();
 
     canvas = document.getElementById("drawingCanvas");
     ctx = canvas.getContext("2d");
     startOver();
-
+    startCalculateDots();
 };
