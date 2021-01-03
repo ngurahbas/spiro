@@ -10,6 +10,16 @@ const setForm = () => {
     }
 };
 
+const setData = () => {
+    for (let prop in userInput) {
+        userInput[prop] = document.forms.userInput[prop].value;
+    }
+    console.log(userInput);
+}
+
 window.onload = () => {
+    document.forms.userInput.oninput = () => {
+        setData();
+    }
     setForm();
 };
