@@ -12,6 +12,9 @@ const setForm = () => {
 
 const setData = () => {
     for (let prop in userInput) {
+        if (document.forms.userInput[prop].value == "") {
+            throw new Error("invalid input");
+        }
         userInput[prop] = document.forms.userInput[prop].value;
     }
     console.log(userInput);
