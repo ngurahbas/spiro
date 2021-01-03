@@ -39,14 +39,14 @@ const cosByRev = (rev) => {
     return Math.cos(angle);
 }
 
-const clearCanvas = () => {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+const clearCanvas = (context) => {
+    context.clearRect(0, 0, canvas.width, canvas.height);
 }
 
-const drawCircle = (ctx, x, y, r) => {
-    ctx.beginPath(); 
-    ctx.arc(x, y, r, 0, Math.PI * 2);
-    ctx.stroke();
+const drawCircle = (context, x, y, r) => {
+    context.beginPath(); 
+    context.arc(x, y, r, 0, Math.PI * 2);
+    context.stroke();
 }
 
 var start;
@@ -74,7 +74,7 @@ const paint = (timeStamp) => {
     let markerX = inX + mRadius * sinByRev(inRev);
     let markerY = inY - mRadius * cosByRev(inRev);
 
-    clearCanvas();
+    clearCanvas(ctx);
     drawCircle(ctx, midX, midY, outR);
     drawCircle(ctx, inX, inY, inR);
     drawCircle(ctx, markerX, markerY, 3);
