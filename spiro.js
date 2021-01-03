@@ -1,6 +1,6 @@
 var userInput = {
-    inR: 1,
-    outR: 2,
+    inR: 9,
+    outR: 17,
     mPos: 0.5,
 };
 
@@ -97,12 +97,6 @@ const drawDots = (context, lastRev) => {
     let keyIt= calc_revToDot.keys();
     let k1 = keyIt.next().value;
 
-    // nextIt = calc_revToDot.keys().next();
-    // let pos1 = calc_revToDot.get(k1);
-    // let k2 = nextIt.value;
-    // let pos2 = calc_revToDot.get(k2);
-    // console.log(pos2);
-
     context.beginPath();
     let result = keyIt.next();
     while (!result.done && result.value < lastRev) {
@@ -154,7 +148,7 @@ const paint = (timeStamp) => {
     drawDots(ctx, inRev); 
     drawCircle(ctx, midX, midY, outR);
     drawCircle(ctx, inX, inY, inR);
-    drawCircle(ctx, markerX, markerY, 1);
+    drawCircle(ctx, markerX, markerY, 4);
 };
 
 var intPaint;
