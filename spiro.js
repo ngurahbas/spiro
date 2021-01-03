@@ -43,9 +43,7 @@ const paint = (timeStamp) => {
         console.log(timeStamp);
     }
 
-    let ctx = document.getElementById("drawingCanvas").getContext("2d");
-    let outR = maxR;
-    
+    let outR = maxR;    
 
     ctx.beginPath();
     clearCanvas();
