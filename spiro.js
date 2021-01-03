@@ -20,6 +20,12 @@ const setData = () => {
     console.log(userInput);
 }
 
+const paint = () => {
+    console.log(intPaint);
+};
+
+var intPaint = setInterval(paint, 200);
+
 window.onload = () => {
     document.forms.userInput.oninput = () => {
         setData();
