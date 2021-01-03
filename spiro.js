@@ -22,7 +22,7 @@ const setData = () => {
 const maxR = 200;
 const midX = 250;
 const midY = 250;
-const rps = 0.1;
+const rps = 1;
 
 var ctx;
 var canvas;
@@ -44,7 +44,9 @@ const clearCanvas = () => {
 }
 
 const drawCircle = (ctx, x, y, r) => {
+    ctx.beginPath(); 
     ctx.arc(x, y, r, 0, Math.PI * 2);
+    ctx.stroke();
 }
 
 var start;
@@ -68,20 +70,17 @@ const paint = (timeStamp) => {
     let inX = midX + cToC * sinByRev(outRev);
     let inY = midY - cToC * cosByRev(outRev);
 
-    console.log(maxR * radiusRatio);
-    console.log("x,y = ", inX, inY);
+    let mRadius = inR * userInput.mPos;
+    let markerX = inX + mRadius * sinByRev(inRev);
+    let markerY = inY - mRadius * cosByRev(inRev);
 
     clearCanvas();
-    ctx.beginPath(); 
     drawCircle(ctx, midX, midY, outR);
-    ctx.stroke();
-    ctx.beginPath(); 
     drawCircle(ctx, inX, inY, inR);
-    ctx.stroke();
-
+    drawCircle(ctx, markerX, markerY, 3);
 };
 
-var intPaint = setInterval(() => {window.requestAnimationFrame(paint);}, 1000);
+var intPaint = setInterval(() => {window.requestAnimationFrame(paint);}, 20);
 
 window.onload = () => {
     document.forms.userInput.oninput = () => {
