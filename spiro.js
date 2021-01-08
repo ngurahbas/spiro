@@ -52,8 +52,8 @@ const calculateDots = () => {
         let radiusRatio = userInput.inR / userInput.outR;
         let inR = maxR * radiusRatio;
         let cToC = maxR - inR;
-        let inX = midX + cToC * sinByRev(outRev);
-        let inY = midY - cToC * cosByRev(outRev);
+        let inX = midX + cToC * sinByRev(-outRev);
+        let inY = midY - cToC * cosByRev(-outRev);
 
         let mRadius = inR * userInput.mPos;
         let markerX = inX + mRadius * sinByRev(inRev);
@@ -137,8 +137,8 @@ const paint = (timeStamp) => {
     let radiusRatio = userInput.inR / userInput.outR;
     let inR = maxR * radiusRatio;
     let cToC = outR - inR;
-    let inX = midX + cToC * sinByRev(outRev);
-    let inY = midY - cToC * cosByRev(outRev);
+    let inX = midX + cToC * sinByRev(-outRev);
+    let inY = midY - cToC * cosByRev(-outRev);
 
     let mRadius = inR * userInput.mPos;
     let markerX = inX + mRadius * sinByRev(inRev);
