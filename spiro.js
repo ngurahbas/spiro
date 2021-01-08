@@ -60,8 +60,8 @@ const calculateDots = () => {
         let markerY = inY - mRadius * cosByRev(inRev);
 
         calc_revToDot.set(inRev, {
-            x: Math.round(markerX),
-            y: Math.round(markerY) 
+            x: markerX,
+            y: markerY 
         });
         if (inRev > 0 && inRev % 1 == 0 && outRev % 1 == 0) {
             calcFinished = true;
