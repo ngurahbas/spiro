@@ -1,35 +1,11 @@
+import {sinByRev, cosByRev} from './math.js'
+import {setForm, setData} from './binding.js'
+
 var userInput = {
     inR: 9,
     outR: 17,
     mPos: 0.5,
 };
-
-const setForm = () => {
-    for (let prop in userInput) {
-        document.forms.userInput[prop].value = userInput[prop];
-    }
-};
-
-const setData = () => {
-    for (let prop in userInput) {
-        if (document.forms.userInput[prop].value == "") {
-            throw new Error("invalid input");
-        }
-        userInput[prop] = document.forms.userInput[prop].value;
-    }
-}
-
-const sinByRev = (rev) => {
-    let calRev = rev % 1;
-    let angle = calRev * Math.PI * 2;
-    return Math.sin(angle);
-}
-
-const cosByRev = (rev) => {
-    let calRev = rev % 1;
-    let angle = calRev * Math.PI * 2;
-    return Math.cos(angle);
-}
 
 const maxR = 200;
 const midX = 250;
@@ -159,13 +135,13 @@ const startOver = () => {
 
 window.onload = () => {
     document.forms.userInput.oninput = () => {
-        setData();
+        setData(document.forms.userInput, userInput);
         
         clearInterval(intPaint);
         startOver();
         startCalculateDots();
     }
-    setForm();
+    setForm(document.forms.userInput, userInput);
 
     canvas = document.getElementById("drawingCanvas");
     ctx = canvas.getContext("2d");
