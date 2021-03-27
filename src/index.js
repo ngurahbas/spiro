@@ -15,10 +15,10 @@ var calc_revToDot = new Map();
 var calc_lastCalcInRev = 0;
 var calc_lastCalcOutRev = 0;
 
-const calc_revPerCycle = 1;
-const calc_revInc = 0.01;
 const calculateDots = () => {
-    console.log("calculateDots");
+    const calc_revPerCycle = 1;
+    const calc_revInc = 0.01;
+
     let inRev,outRev;
     let calcFinished = false;
     for (inRev = calc_lastCalcInRev; inRev <= (calc_lastCalcInRev + calc_revPerCycle); inRev += calc_revInc) {
