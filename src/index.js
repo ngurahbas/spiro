@@ -94,17 +94,14 @@ var ctx;
 var canvas;
 
 var start;
-var outRev = 0;
-var inRev = 0;
 const paint = (timeStamp) => {
     if (!start) {
         start = timeStamp;
     }
 
     let outR = maxR;
-
-    let elTime = timeStamp - start;
-    let roundEltime = Math.round(elTime);
+    
+    let roundEltime = Math.round(timeStamp - start);
     let inRev = rps * roundEltime / 1000;
     let outRev = inRev * (userInput.inR / userInput.outR);
 
