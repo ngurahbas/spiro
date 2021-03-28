@@ -1,5 +1,6 @@
 import {sinByRev, cosByRev} from './math.js'
 import {setForm, setData} from './binding.js'
+import {clearCanvas, drawCircle} from './canvas.js'
 
 var userInput = {
     inR: 9,
@@ -57,16 +58,6 @@ const startCalculateDots = () => {
     return calculateDots();
 };
 
-const clearCanvas = (context) => {
-    context.clearRect(0, 0, canvas.width, canvas.height);
-}
-
-const drawCircle = (context, x, y, r) => {
-    context.beginPath();
-    context.arc(x, y, r, 0, Math.PI * 2);
-    context.stroke();
-}
-
 const drawDots = (context, lastRev) => {
     let keyIt= calc_revToDot.keys();
     let k1 = keyIt.next().value;
@@ -100,7 +91,7 @@ const paint = (timeStamp) => {
     }
 
     let outR = maxR;
-    
+
     let roundEltime = Math.round(timeStamp - start);
     let inRev = rps * roundEltime / 1000;
     let outRev = inRev * (userInput.inR / userInput.outR);
@@ -115,7 +106,7 @@ const paint = (timeStamp) => {
     let markerX = inX + mRadius * sinByRev(inRev);
     let markerY = inY - mRadius * cosByRev(inRev);
 
-    clearCanvas(ctx);
+    clearCanvas(ctx, canvas.width, canvas.height);
     drawDots(ctx, inRev); 
     drawCircle(ctx, midX, midY, outR);
     drawCircle(ctx, inX, inY, inR);
