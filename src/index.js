@@ -2,17 +2,17 @@ import { sinByRev, cosByRev } from './math.js'
 import { setForm, setData } from './binding.js'
 import { clearCanvas, drawCircle, drawDots } from './canvas.js'
 
-var userInput = {
+const userInput = {
     inR: 9,
     outR: 17,
     mPos: 0.5,
 };
 
-const maxR = 200;
-const midX = 250;
-const midY = 250;
+const startCalculateDots = (canvas) => {
+    let maxR = Math.min(canvas.width, canvas.height) / 2;
+    let midX = canvas.width / 2;
+    let midY = canvas.height / 2;
 
-const startCalculateDots = () => {
     let calc_revToDot = new Map();
     let calc_lastCalcInRev = 0;
     let calc_lastCalcOutRev = 0;
@@ -59,25 +59,26 @@ const startCalculateDots = () => {
 
 const rps = 1;
 
-var ctx;
-var canvas;
-
 var start;
 var intPaint;
-const startOver = (revToDots) => {
+const startOver = (canvas, revToDots) => {
+    let ctx = canvas.getContext("2d");
+
     const paint = (timeStamp) => {
         if (!start) {
             start = timeStamp;
         }
 
-        let outR = maxR;
+        let outR = Math.min(canvas.width, canvas.height) / 2;
+        let midX = canvas.width / 2;
+        let midY = canvas.height / 2;
 
         let roundEltime = Math.round(timeStamp - start);
         let inRev = rps * roundEltime / 1000;
         let outRev = inRev * (userInput.inR / userInput.outR);
 
         let radiusRatio = userInput.inR / userInput.outR;
-        let inR = maxR * radiusRatio;
+        let inR = outR * radiusRatio;
         let cToC = outR - inR;
         let inX = midX + cToC * sinByRev(-outRev);
         let inY = midY - cToC * cosByRev(-outRev);
@@ -100,19 +101,18 @@ const startOver = (revToDots) => {
 };
 
 window.onload = () => {
+    let canvas = document.getElementById("drawingCanvas");
+
     document.forms.userInput.oninput = () => {
         setData(document.forms.userInput, userInput);
 
         clearInterval(intPaint);
 
-        let revToDots = startCalculateDots();
-        startOver(revToDots);
+        let revToDots = startCalculateDots(canvas);
+        startOver(canvas, revToDots);
     }
     setForm(document.forms.userInput, userInput);
 
-    canvas = document.getElementById("drawingCanvas");
-    ctx = canvas.getContext("2d");
-
-    let revToDots = startCalculateDots();
-    startOver(revToDots);
+    let revToDots = startCalculateDots(canvas);
+    startOver(canvas, revToDots);
 };
