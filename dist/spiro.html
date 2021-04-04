@@ -4,22 +4,27 @@
 <head>
     <title>Spiro</title>
     <script type="text/javascript" src="index.bundle.js"></script>
+    <link rel="stylesheet" href="index.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
-<canvas width="501" height="501" id="drawingCanvas">
-
-</canvas>
-<form name="userInput">
-    <label for="inR">Inner R</label>&nbsp;/&nbsp;<label for="outR">Outter R</label>
-    <input type="number" id="inR" name="inR" size="2"/>
-    /
-    <input type="number" id="outR" name="outR" size="2"/>
-    <br/>
-    <label for="mPos">marker position</label><input type="range" id="mPos" name="mPos" value="0" min="0" max="1" step="0.01"/>
-</form>
-
-
+<div class="container">
+    <div>
+        <canvas id="drawingCanvas" width="1024" height="1024">
+        </canvas>
+    </div>
+    <div>
+        <form name="userInput">
+            <div class="">
+                <label for="inR">Inner R</label><input type="number" id="inR" name="inR" size="2"/>
+                <label for="outR">Outter R</label>
+                <input type="number" id="outR" name="outR" size="2"/>
+                <label for="mPos">marker position</label><input type="range" id="mPos" name="mPos" value="0" min="0" max="1" step="0.01"/>
+            </div>
+        </form>
+    </div>    
+</div>
 </body>
 
 </html>
