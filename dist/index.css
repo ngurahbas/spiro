@@ -1,5 +1,5 @@
 body, input {
-    font-size: 3mm;
+    font-size: 4mm;
 }
 
 .container {
@@ -11,7 +11,6 @@ body, input {
 
 .container > div {
     padding: 1em;
-    display: flex;
     justify-content: center;
 }
 
@@ -20,7 +19,6 @@ body, input {
 }
 
 @media screen and (min-width: 600px) {
-    
     #drawingCanvas {
         width: 600px;
     }
