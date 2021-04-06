@@ -10,12 +10,17 @@ body, input {
 }
 
 .container > div {
-    padding: 1em;
+    padding: 5vw;
     justify-content: center;
+    flex: 1 0 auto;
 }
 
 #drawingCanvas {
-    width: 100%;
+    width: 90vw;
+}
+
+.formContainer {
+    display: grid;
 }
 
 @media screen and (min-width: 600px) {
