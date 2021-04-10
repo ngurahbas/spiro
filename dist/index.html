@@ -2,32 +2,48 @@
 <html>
 
 <head>
-    <title>Spiro</title>
+    <title>spiro.baskara.dev - Devadatta</title>
     <script type="text/javascript" src="index.bundle.js"></script>
     <link rel="stylesheet" href="index.css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
-<div class="container">
-    <div>
-        <canvas id="drawingCanvas" width="1024" height="1024">
-        </canvas>
+<div class="topWrapper">
+    <div class="container">
+        <div>
+            <canvas id="drawingCanvas" width="1024" height="1024">
+            </canvas>
+        </div>
+        <div>
+            <form name="userInput">
+                <div class="formContainer">
+                    <label for="inR" class="red">Inner R</label>
+                    <div><input type="number" id="inR" name="inR" min="1" class="red"/></div>
+                    
+                    <label for="outR" class="blue">Outter R</label>
+                    <div class="blue"><input type="number" id="outR" name="outR" min="1" class="blue"/></div>
+                    
+                    <label for="mPos" class="green">Marker Position</label>
+                    <input type="range" id="mPos" name="mPos" value="0" min="0" max="1" step="0.01" class="green"/>
+                </div>
+            </form>
+        </div>    
     </div>
-    <div>
-        <form name="userInput">
-            <div class="formContainer">
-                <label for="inR" class="red">Inner R</label>
-                <div><input type="number" id="inR" name="inR" min="1" class="red"/></div>
-                
-                <label for="outR" class="blue">Outter R</label>
-                <div class="blue"><input type="number" id="outR" name="outR" min="1" class="blue"/></div>
-                
-                <label for="mPos" class="green">Marker Position</label>
-                <input type="range" id="mPos" name="mPos" value="0" min="0" max="1" step="0.01" class="green"/>
-            </div>
-        </form>
-    </div>    
+    <div class="footer">
+        Releases:
+        <ul>
+            <li>
+                <a href="/panchajanya">Panchajanya</a>
+            </li>
+            <li>
+                <a href="/">Devadatta</a>
+            </li>
+            <li>
+                <a href="/paundra">Paundra</a>
+            </li>
+        </ul>
+    </div>
 </div>
 </body>
 

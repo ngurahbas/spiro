@@ -1,5 +1,6 @@
 body {
     font-size: 16px;
+    margin: 0;
 }
 
 .container {
@@ -9,6 +10,17 @@ body {
     justify-content: center;
 }
 
+.footer {
+    font-size: 0.8em;
+    background-color: #eee;
+    color: #666;
+    height: 2.5em;
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .container > div {
     width: 512px;
     display: flex;
@@ -19,6 +31,20 @@ body {
 
 #drawingCanvas {
     width: 100%;
+}
+
+.footer ul {
+    padding: 1em;
+}
+
+
+.footer ul > li {
+    display: inline;
+    list-style: square;
+}
+
+.footer ul > li::before {
+    content: '🐚';
 }
 
 .formContainer {
