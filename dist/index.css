@@ -10,18 +10,20 @@ body {
     justify-content: center;
 }
 
-.footer {
+.header {
     font-size: 0.8em;
     background-color: #eee;
     color: #666;
-    height: 2.5em;
+    height: 2rem;
     box-sizing: border-box;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .container > div {
+    padding: 4px;
     width: 512px;
     display: flex;
     justify-content: center;
@@ -33,17 +35,17 @@ body {
     width: 100%;
 }
 
-.footer ul {
+.header ul {
     padding: 1em;
 }
 
 
-.footer ul > li {
+.header ul > li {
     display: inline;
     list-style: square;
 }
 
-.footer ul > li::before {
+.header ul > li::before {
     content: '🐚';
 }
 
@@ -125,7 +127,7 @@ input[type="range"].green::-ms-fill-upper {
     background-color: #999;
 }
 
-@media screen and (min-width: 512px) {
+@media screen and (min-width: 520px) {
     #drawingCanvas {
         width: 512px;
     }
