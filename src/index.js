@@ -88,10 +88,17 @@ const startOver = (canvas, revToDots) => {
         let markerY = inY - mRadius * cosByRev(inRev);
 
         clearCanvas(ctx, canvas.width, canvas.height);
-        drawDots(ctx, revToDots, inRev);
-        drawCircle(ctx, midX, midY, outR);
-        drawCircle(ctx, inX, inY, inR);
-        drawCircle(ctx, markerX, markerY, 4);
+        drawDots(ctx, revToDots, inRev, "#000000");
+        
+        drawCircle(ctx, midX, midY, outR, "#006");
+        drawCircle(ctx, inX, inY, inR, "#900");
+        drawCircle(ctx, markerX, markerY, 4, "#060");
+
+        ctx.beginPath();
+        ctx.strokeStyle = "#060";
+        ctx.moveTo(inX, inY);
+        ctx.lineTo(markerX, markerY);
+        ctx.stroke();
     };
 
     start = null;

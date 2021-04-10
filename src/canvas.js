@@ -2,13 +2,27 @@ const clearCanvas = (context, width, height) => {
     context.clearRect(0, 0, width, height);
 }
 
-const drawCircle = (context, x, y, r) => {
+const drawCircle = (context, x, y, r, strokeStyle) => {
+    let oldStrokeStyle = context.strokeStyle;
+    if (strokeStyle) {
+        context.strokeStyle = strokeStyle;
+    }
+
     context.beginPath();
     context.arc(x, y, r, 0, Math.PI * 2);
     context.stroke();
+
+    context.strokeStyle = oldStrokeStyle;
 }
 
-const drawDots = (context, revToDots, lastRev) => {
+const drawDots = (context, revToDots, lastRev, strokeStyle) => {
+    let oldStrokeStyle = context.strokeStyle;
+    let oldLineWidth = context.lineWidth;
+    context.lineWidth = 2 * context.lineWidth;
+    if (strokeStyle) {
+        context.strokeStyle = strokeStyle;
+    }
+
     let keyIt = revToDots.keys();
     let k1 = keyIt.next().value;
 
@@ -27,6 +41,8 @@ const drawDots = (context, revToDots, lastRev) => {
     }
 
     context.stroke();
+    context.strokeStyle = oldStrokeStyle;
+    context.lineWidth = oldLineWidth;
 }
 
 export {clearCanvas, drawCircle, drawDots};

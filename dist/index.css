@@ -1,5 +1,9 @@
-body, input {
-    font-size: 4mm;
+body {
+    font-size: 16px;
+}
+
+label {
+    padding: 0.1em;
 }
 
 .container {
@@ -10,7 +14,7 @@ body, input {
 }
 
 .container > div {
-    padding: 5vw;
+    padding: 0.5em;
     justify-content: center;
     flex: 1 0 auto;
 }
@@ -27,12 +31,4 @@ body, input {
     #drawingCanvas {
         width: 600px;
     }
-}
-
-.container > div:nth-child(odd) {
-    background-color: aliceblue;
-}
-
-.container > div:nth-child(even) {
-    background-color: beige;
 }
