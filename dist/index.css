@@ -11,7 +11,9 @@ body {
 
 .container > div {
     width: 512px;
+    display: flex;
     justify-content: center;
+    align-items: center;
     flex: 0 1 auto;
 }
 
@@ -23,6 +25,7 @@ body {
     display: grid;
     grid-template-columns: auto auto;
     grid-row-gap: 0.25em;
+    padding: 0.5em;
 }
 
 .formContainer label {
@@ -49,6 +52,11 @@ body {
 
 .formContainer .green {
     color: #060;
+}
+
+
+.formContainer input[type="number"] {
+    width: 3em;
 }
 
 
