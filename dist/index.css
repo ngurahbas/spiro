@@ -14,21 +14,22 @@ label {
 }
 
 .container > div {
-    padding: 0.5em;
+    width: 512px;
     justify-content: center;
-    flex: 1 0 auto;
+    flex: 0 1 auto;
 }
 
 #drawingCanvas {
-    width: 90vw;
+    width: 100%;
 }
 
 .formContainer {
     display: grid;
+    grid-template-columns: auto auto;
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 512px) {
     #drawingCanvas {
-        width: 600px;
+        width: 512px;
     }
 }
