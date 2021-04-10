@@ -63,6 +63,7 @@ var start;
 var intPaint;
 const startOver = (canvas, revToDots) => {
     let ctx = canvas.getContext("2d");
+    ctx.lineWidth = 2;
 
     const paint = (timeStamp) => {
         if (!start) {
