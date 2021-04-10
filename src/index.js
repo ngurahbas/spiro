@@ -5,7 +5,7 @@ import { clearCanvas, drawCircle, drawDots } from './canvas.js'
 const userInput = {
     inR: 9,
     outR: 17,
-    mPos: 0.5,
+    mPos: 0.7,
 };
 
 const startCalculateDots = (canvas) => {
