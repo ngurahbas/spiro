@@ -92,14 +92,25 @@ const startOver = (canvas, revToDots) => {
         drawDots(ctx, revToDots, inRev, "#000000");
         
         drawCircle(ctx, midX, midY, outR, "#006");
-        drawCircle(ctx, inX, inY, inR, "#900");
+        drawCircle(ctx, inX, inY, inR, "#900", "rgba(153, 0, 0, 0.9)");
         drawCircle(ctx, markerX, markerY, 4, "#060");
 
-        ctx.beginPath();
+        let oldStrokeStyle = ctx.strokeStyle;
+        let oldLineDash = ctx.getLineDash();
+        let oldLineWidth = ctx.lineWidth;
+        
         ctx.strokeStyle = "#060";
+        ctx.setLineDash([8, 2]);
+        ctx.lineWidth = 2 * ctx.lineWidth;
+
+        ctx.beginPath();
         ctx.moveTo(inX, inY);
         ctx.lineTo(markerX, markerY);
         ctx.stroke();
+
+        ctx.strokeStyle = oldStrokeStyle;
+        ctx.setLineDash(oldLineDash);
+        ctx.lineWidth = oldLineWidth;
     };
 
     start = null;
