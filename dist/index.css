@@ -11,7 +11,7 @@ body {
 }
 
 .header {
-    font-size: 0.8em;
+    font-size: 0.7em;
     background-color: #eee;
     color: #666;
     height: 2rem;
@@ -35,10 +35,14 @@ body {
     width: 100%;
 }
 
-.header ul {
-    padding: 1em;
+
+.header a {
+    color: #666;
 }
 
+.header ul {
+    padding: 0;
+}
 
 .header ul > li {
     display: inline;
