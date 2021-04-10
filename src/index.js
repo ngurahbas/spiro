@@ -9,7 +9,7 @@ const userInput = {
 };
 
 const startCalculateDots = (canvas) => {
-    let maxR = Math.min(canvas.width, canvas.height) / 2;
+    let maxR = Math.min(canvas.width, canvas.height) / 2 - 1;
     let midX = canvas.width / 2;
     let midY = canvas.height / 2;
 
@@ -70,7 +70,7 @@ const startOver = (canvas, revToDots) => {
             start = timeStamp;
         }
 
-        let outR = Math.min(canvas.width, canvas.height) / 2;
+        let outR = Math.min(canvas.width, canvas.height) / 2 - 1;
         let midX = canvas.width / 2;
         let midY = canvas.height / 2;
 
