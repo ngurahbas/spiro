@@ -112,7 +112,21 @@ window.onload = () => {
     let canvas = document.getElementById("drawingCanvas");
 
     document.forms.userInput.oninput = () => {
-        setData(document.forms.userInput, userInput);
+        try {
+            if (parseInt(document.forms.userInput.inR.value) >= parseInt(document.forms.userInput.outR.value)) {
+                throw new Error("Inner R must be less than Outter R.");
+            }
+
+            if (parseInt(document.forms.userInput.inR) <= 0 || 
+                parseInt(document.forms.userInput.outR <= 0)) {
+                throw new Error("R value must be positive.")
+            }
+            
+            setData(document.forms.userInput, userInput);
+        } catch (e) {
+            alert(e);
+            setForm(document.forms.userInput, userInput);
+        }
 
         clearInterval(intPaint);
 
