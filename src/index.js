@@ -16,12 +16,12 @@ function point(x, y) {
 }
 
 const startCalculateDots = (canvas) => {
-    let maxR = Math.min(canvas.width, canvas.height) / 2 - 1;
-    let midX = canvas.width / 2;
-    let midY = canvas.height / 2;
+    let outR = Math.min(canvas.width, canvas.height) / 2 - 1;
+
+    let midPoint = point(canvas.width / 2, canvas.height / 2);
 
     let radiusRatio = userInput.inR / userInput.outR;
-    let inR = maxR * radiusRatio;
+    let inR = outR * radiusRatio;
     let mRadius = inR * userInput.mPos;
 
     let calc_revToDot = new Map();
@@ -37,9 +37,9 @@ const startCalculateDots = (canvas) => {
             inRev = Math.round(inRev * 100) / 100;
             outRev = inRev * radiusRatio;
 
-            let cToC = maxR - inR;
-            let inX = midX + cToC * sinByRev(-outRev);
-            let inY = midY - cToC * cosByRev(-outRev);
+            let cToC = outR - inR;
+            let inX = midPoint.x + cToC * sinByRev(-outRev);
+            let inY = midPoint.y - cToC * cosByRev(-outRev);
 
             let markerX = inX + mRadius * sinByRev(inRev);
             let markerY = inY - mRadius * cosByRev(inRev);
@@ -75,21 +75,21 @@ const startOver = (canvas, revToDots) => {
             start = timeStamp;
         }
 
-        let maxR = Math.min(canvas.width, canvas.height) / 2 - 1;
-        let midX = canvas.width / 2;
-        let midY = canvas.height / 2;
+        let outR = Math.min(canvas.width, canvas.height) / 2 - 1;
+
+        let midPoint = point(canvas.width / 2, canvas.height / 2);
 
         let radiusRatio = userInput.inR / userInput.outR;
-        let inR = maxR * radiusRatio;
+        let inR = outR * radiusRatio;
         let mRadius = inR * userInput.mPos;
 
         let roundEltime = Math.round(timeStamp - start);
         let inRev = rps * roundEltime / 1000;
         let outRev = inRev * radiusRatio;
 
-        let cToC = maxR - inR;
-        let inX = midX + cToC * sinByRev(-outRev);
-        let inY = midY - cToC * cosByRev(-outRev);
+        let cToC = outR - inR;
+        let inX = midPoint.x + cToC * sinByRev(-outRev);
+        let inY = midPoint.y - cToC * cosByRev(-outRev);
 
         let markerX = inX + mRadius * sinByRev(inRev);
         let markerY = inY - mRadius * cosByRev(inRev);
@@ -97,7 +97,7 @@ const startOver = (canvas, revToDots) => {
         clearCanvas(ctx, canvas.width, canvas.height);
         drawDots(ctx, revToDots, inRev, "#000000");
         
-        drawCircle(ctx, midX, midY, maxR, "#006");
+        drawCircle(ctx, midPoint.x, midPoint.y, outR, "#006");
         drawCircle(ctx, inX, inY, inR, "#900", "rgba(153, 0, 0, 0.9)");
         drawCircle(ctx, markerX, markerY, 4, "#060");
 
