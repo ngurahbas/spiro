@@ -53,6 +53,10 @@ body {
     content: '🐚';
 }
 
+.header .tag {
+    font-size: 0.7em;
+}
+
 .formContainer {
     display: grid;
     grid-template-columns: auto auto;
