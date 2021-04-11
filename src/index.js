@@ -8,10 +8,21 @@ const userInput = {
     mPos: 0.7,
 };
 
+function point(x, y) {
+    return {
+        x: x,
+        y: y
+    };
+}
+
 const startCalculateDots = (canvas) => {
     let maxR = Math.min(canvas.width, canvas.height) / 2 - 1;
     let midX = canvas.width / 2;
     let midY = canvas.height / 2;
+
+    let radiusRatio = userInput.inR / userInput.outR;
+    let inR = maxR * radiusRatio;
+    let mRadius = inR * userInput.mPos;
 
     let calc_revToDot = new Map();
     let calc_lastCalcInRev = 0;
@@ -24,22 +35,16 @@ const startCalculateDots = (canvas) => {
         let calcFinished = false;
         for (inRev = calc_lastCalcInRev; inRev <= (calc_lastCalcInRev + calc_revPerCycle); inRev += calc_revInc) {
             inRev = Math.round(inRev * 100) / 100;
-            outRev = inRev * (userInput.inR / userInput.outR);
+            outRev = inRev * radiusRatio;
 
-            let radiusRatio = userInput.inR / userInput.outR;
-            let inR = maxR * radiusRatio;
             let cToC = maxR - inR;
             let inX = midX + cToC * sinByRev(-outRev);
             let inY = midY - cToC * cosByRev(-outRev);
 
-            let mRadius = inR * userInput.mPos;
             let markerX = inX + mRadius * sinByRev(inRev);
             let markerY = inY - mRadius * cosByRev(inRev);
 
-            calc_revToDot.set(inRev, {
-                x: markerX,
-                y: markerY
-            });
+            calc_revToDot.set(inRev, point(markerX, markerY));
             if (inRev > 0 && inRev % 1 == 0 && outRev % 1 == 0) {
                 calcFinished = true;
                 break;
@@ -70,28 +75,29 @@ const startOver = (canvas, revToDots) => {
             start = timeStamp;
         }
 
-        let outR = Math.min(canvas.width, canvas.height) / 2 - 1;
+        let maxR = Math.min(canvas.width, canvas.height) / 2 - 1;
         let midX = canvas.width / 2;
         let midY = canvas.height / 2;
 
+        let radiusRatio = userInput.inR / userInput.outR;
+        let inR = maxR * radiusRatio;
+        let mRadius = inR * userInput.mPos;
+
         let roundEltime = Math.round(timeStamp - start);
         let inRev = rps * roundEltime / 1000;
-        let outRev = inRev * (userInput.inR / userInput.outR);
+        let outRev = inRev * radiusRatio;
 
-        let radiusRatio = userInput.inR / userInput.outR;
-        let inR = outR * radiusRatio;
-        let cToC = outR - inR;
+        let cToC = maxR - inR;
         let inX = midX + cToC * sinByRev(-outRev);
         let inY = midY - cToC * cosByRev(-outRev);
 
-        let mRadius = inR * userInput.mPos;
         let markerX = inX + mRadius * sinByRev(inRev);
         let markerY = inY - mRadius * cosByRev(inRev);
 
         clearCanvas(ctx, canvas.width, canvas.height);
         drawDots(ctx, revToDots, inRev, "#000000");
         
-        drawCircle(ctx, midX, midY, outR, "#006");
+        drawCircle(ctx, midX, midY, maxR, "#006");
         drawCircle(ctx, inX, inY, inR, "#900", "rgba(153, 0, 0, 0.9)");
         drawCircle(ctx, markerX, markerY, 4, "#060");
 
