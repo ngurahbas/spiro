@@ -15,6 +15,7 @@ function point(x, y) {
     };
 }
 
+var intCalculateDots;
 const startCalculateDots = (canvas) => {
     let outR = Math.min(canvas.width, canvas.height) / 2 - 1;
 
@@ -27,6 +28,8 @@ const startCalculateDots = (canvas) => {
     let calc_revToDot = new Map();
     let calc_lastCalcInRev = 0;
     let calc_lastCalcOutRev = 0;
+
+    clearInterval(intCalculateDots)
     const calculateDots = () => {
         const calc_revPerCycle = 1;
         const calc_revInc = 0.01;
@@ -53,12 +56,14 @@ const startCalculateDots = (canvas) => {
         }
         calc_lastCalcInRev = inRev;
         calc_lastCalcOutRev = outRev;
-        if (!calcFinished) {
-            setTimeout(calculateDots, 5);
+        if (calcFinished) {
+            clearInterval(intCalculateDots)
+            console.log("calculateDots finished", inRev, outRev);
         }
     };
 
     calculateDots();
+    intCalculateDots = setInterval(calculateDots, 5);
     return calc_revToDot;
 };
 
