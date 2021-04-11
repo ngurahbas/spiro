@@ -139,16 +139,17 @@ window.onload = () => {
                 throw new Error("Inner R must be less than Outter R.");
             }
 
-            if (parseInt(document.forms.userInput.inR) <= 0 || 
-                parseInt(document.forms.userInput.outR <= 0)) {
+            if (parseInt(document.forms.userInput.inR.value) <= 0 || 
+                parseInt(document.forms.userInput.outR.value) <= 0) {
                 throw new Error("R value must be positive.")
             }
             
             setData(document.forms.userInput, userInput);
         } catch (e) {
-            alert(e);
-            setForm(document.forms.userInput, userInput);
+            document.getElementById("errorSpan").textContent = e;
+            return;
         }
+        document.getElementById("errorSpan").textContent = " ";
 
         clearInterval(intPaint);
 
