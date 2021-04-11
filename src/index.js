@@ -156,6 +156,12 @@ const exportImage = (format) => {
     let inMidPoint = calculateMidInnerCircle(midPoint, inR, outR, outRev);
     let markerPoint = calculateMarkerPoint(inMidPoint, mRadius, inRev);
 
+    if (format != 'PNG') {
+        console.log('notPng');
+        context.fillStyle = '#ffffff';
+        context.fillRect(0, 0, canvas.width, canvas.height);
+    }
+
     context.beginPath()
     do {
         inRev += 0.01;
@@ -186,7 +192,6 @@ const exportImage = (format) => {
     a.download = 'spirograph_' + userInput.inR + '_' + userInput.outR + '_' + userInput.mPos
             + '.' + format.toLowerCase();
     document.body.appendChild(a);
-    console.log(a.download);
     a.click();
     a.remove();
 }
