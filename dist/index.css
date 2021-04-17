@@ -19,6 +19,7 @@ div.content {
     background-color: #ccc;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     padding-bottom: var(--footer-height);
 }
 
@@ -32,12 +33,13 @@ div.footer{
 
 div.content > * {
     flex: 1 1 auto;
+    padding: 0.25rem;
 }
 
-.canvasWrapper {
+div.content > .canvasWrapper {
     background-color: red;
+    flex-grow: 0;
     width: min(100%, 512px);
-
 }
 
 .formWrapper {

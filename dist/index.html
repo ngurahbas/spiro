@@ -3,6 +3,7 @@
 
 <head>
     <title>spiro.baskara.dev - Devadatta</title>
+    <script type="text/javascript" src="index.bundle.js"></script>
     <link rel="stylesheet" href="index.css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
@@ -18,14 +19,21 @@
         </canvas>
         <div class="formWrapper">
             <form name="userInput">
-                <label for="inR" class="red">Inner R</label>
-                <input type="number" id="inR" name="inR" min="1" class="red"/>
+                <label for="inR">Inner R</label>
+                <input type="number" id="inR" name="inR" min="1"/>
+                <label for="outR">Outter R</label>
+                <input type="number" id="outR" name="outR" min="1"/>
+                <label for="mPos">Marker Position</label>
+                <input type="range" id="mPos" name="mPos" value="0" min="0" max="1" step="0.01"/>
+                <input type="button" name="expPng" title="Export PNG" value="Export PNG">
+                <input type="button" name="expJpg" title="Export JPEG" value="Export JPEG">
+                
             </form>
         </div>
     </div>
     <div class="footer"></div>
 </div>
-<!-- <div class="topWrapper">
+<!--
     <div class="header">
         Versions:
         <ul>
@@ -40,30 +48,7 @@
             </li>
         </ul>
     </div>
-    <div class="container">
-        <div>
-            <canvas id="drawingCanvas" width="1024" height="1024">
-            </canvas>
-        </div>
-        <div>
-            <form name="userInput">
-                <div class="formContainer">
-                    <label for="inR" class="red">Inner R</label>
-                    <div class="right"><input type="number" id="inR" name="inR" min="1" class="red"/></div>
-                    
-                    <label for="outR" class="blue">Outter R</label>
-                    <div class="blue right"><input type="number" id="outR" name="outR" min="1" class="blue"/></div>
-                    
-                    <label for="mPos" class="green">Marker Position</label>
-                    <input type="range" id="mPos" name="mPos" value="0" min="0" max="1" step="0.01" class="green"/>
-                    <div class="left"><input type="button" name="expPng" title="Export PNG" value="Export PNG"></div>
-                    <div class="right"><input type="button" name="expJpg" title="Export JPEG" value="Export JPEG"></div>
-                    <span class="errorSpan" id="errorSpan"></span>
-                </div>
-            </form>
-        </div>    
-    </div>
-</div>-->
+-->
 <script>
     let vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
