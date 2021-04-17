@@ -18,6 +18,7 @@ div.root {
 div.content {
     background-color: #ccc;
     display: flex;
+    flex-wrap: wrap;
     padding-bottom: var(--footer-height);
 }
 
@@ -30,6 +31,20 @@ div.footer{
 }
 
 div.content > * {
-    flex: 0 1 auto;
-    max-width: 100%;
+    flex: 1 1 auto;
+}
+
+.canvasWrapper {
+    background-color: red;
+    width: min(100%, 512px);
+
+}
+
+.formWrapper {
+    background-color: blue;
+}
+
+#drawingCanvas {
+    background-color: brown;
+    width: 100%;
 }

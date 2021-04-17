@@ -12,8 +12,16 @@
 <body>
 <div class="root">
     <div class="content">
-        <canvas id="drawingCanvas" width="1024" height="1024">
+        <div class="canvasWrapper">
+            <canvas id="drawingCanvas" width="1024" height="1024"></canvas>
+        </div>
         </canvas>
+        <div class="formWrapper">
+            <form name="userInput">
+                <label for="inR" class="red">Inner R</label>
+                <input type="number" id="inR" name="inR" min="1" class="red"/>
+            </form>
+        </div>
     </div>
     <div class="footer"></div>
 </div>
