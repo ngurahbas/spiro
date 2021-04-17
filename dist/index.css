@@ -31,19 +31,56 @@ div.footer{
 }
 
 div.content > * {
-    flex: 1 1 auto;
+    flex: 0 1 auto;
     padding: 0.25rem;
 }
 
 div.content > .canvasWrapper {
-    flex-grow: 0;
     width: min(100%, 512px);
 }
 
 div.content > .formWrapper {
-    background-color: #eee;
+    display: flex;
+    align-items: center;
+    width: min(100%, 30rem);
+}
+
+.formWrapper > form {
+    width: 100%;
 }
 
 #drawingCanvas {
     width: 100%;
+}
+
+.inputWrapper {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.inputWrapper input[type="number"] {
+    width: 3em;
+    height: 1.2em;
+}
+
+.inputWrapper > label {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 1em;
+}
+
+.inputWrapper input[type="range"] {
+    margin: 1.5em 0;
+}
+
+#errorSpan {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    margin: 0.25em;
+}
+
+#errorSpan {
+    color: #900;
+    background-color: #fee;
 }
