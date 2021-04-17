@@ -11,11 +11,11 @@
 
 <body>
 <div class="root">
-    <div class="body">
+    <div class="content">
         <canvas id="drawingCanvas" width="1024" height="1024">
         </canvas>
     </div>
-    <div class="footer">Footer</div>
+    <div class="footer"></div>
 </div>
 <!-- <div class="topWrapper">
     <div class="header">
@@ -56,6 +56,14 @@
         </div>    
     </div>
 </div>-->
+<script>
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+    window.addEventListener('resize', () => {
+        let vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+        console.log('resize');
+    });
+</script>
 </body>
-
 </html>
