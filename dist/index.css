@@ -67,11 +67,20 @@ div.content > .formWrapper {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    padding-right: 1em;
+    padding-right: 0.5em;
 }
 
 .inputWrapper input[type="range"] {
     margin: 1.5em 0;
+}
+
+.buttonWrapper {
+    display: flex;
+    padding: 0 0.5em;
+}
+
+.buttonWrapper.left {
+    justify-content: flex-end;
 }
 
 #errorSpan {
@@ -81,6 +90,6 @@ div.content > .formWrapper {
 }
 
 #errorSpan {
-    color: #900;
+    color: #600;
     background-color: #fee;
 }
