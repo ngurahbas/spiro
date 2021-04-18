@@ -23,11 +23,14 @@ div.content {
 }
 
 div.footer{
-    background-color: #fcc;
+    background-color: #333;
     position: absolute;
     bottom: 0;
     width: 100%;
     height: var(--footer-height);
+    display: flex;
+    padding-top: 0.4rem;
+    justify-content: center;
 }
 
 div.content > * {
@@ -56,6 +59,19 @@ div.content > .formWrapper {
 .inputWrapper {
     display: grid;
     grid-template-columns: 50% 50%;
+}
+
+.footer ul {
+    padding: 0;
+    margin: 0;
+}
+
+.footer ul li {
+    display: inline;
+}
+
+.footer ul li::before {
+    content: '🐚';
 }
 
 .inputWrapper input[type="number"] {
@@ -87,6 +103,19 @@ div.content > .formWrapper {
     grid-column-start: 1;
     grid-column-end: 3;
     margin: 0.25em;
+}
+
+.footer {
+    font-size: 0.7em;
+    color: #eee;
+}
+
+.footer a {
+    color: #99f;
+}
+
+.footer .tag {
+    font-size: 0.8em;
 }
 
 #errorSpan {
