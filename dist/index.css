@@ -1,160 +1,140 @@
-body {
+:root {
     font-size: 16px;
+    font-family: sans-serif;
+}
+
+body {
+    padding: 0;
     margin: 0;
 }
 
-.container {
+div.root {
+    position: relative;
+    min-height: 100vh;
+    min-height: calc(var(--vh, 1vh) * 100);
+    --footer-height: 1.2rem;
+}
+
+div.content {
     display: flex;
-    width: auto;
     flex-wrap: wrap;
     justify-content: center;
+    padding-bottom: var(--footer-height);
 }
 
-.header {
-    font-size: 0.7em;
-    background-color: #eee;
-    color: #666;
-    height: 2rem;
-    box-sizing: border-box;
+div.footer{
+    background-color: #333;
+    position: absolute;
+    bottom: 0;
     width: 100%;
+    height: var(--footer-height);
     display: flex;
+    padding-top: 0.4rem;
     justify-content: center;
-    align-items: center;
 }
 
-.container > div {
-    padding: 4px;
-    width: 512px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+div.content > * {
     flex: 0 1 auto;
+    padding: 0.25rem;
+}
+
+div.content > .canvasWrapper {
+    width: min(100%, 512px);
+}
+
+div.content > .formWrapper {
+    display: flex;
+    align-items: center;
+    width: min(100%, 30rem);
+}
+
+.formWrapper > form {
+    width: 100%;
 }
 
 #drawingCanvas {
     width: 100%;
 }
 
-
-.header a {
-    color: #666;
+.inputWrapper {
+    display: grid;
+    grid-template-columns: 50% 50%;
 }
 
-.header ul {
+.footer ul {
     padding: 0;
+    margin: 0;
 }
 
-.header ul > li {
+.footer ul li {
     display: inline;
-    list-style: square;
 }
 
-.header ul > li::before {
+.footer ul li::before {
     content: '🐚';
 }
 
-.header .tag {
-    font-size: 0.7em;
+.inputWrapper input[type="number"] {
+    width: 3em;
+    height: 1.2em;
 }
 
-.formContainer {
-    display: grid;
-    grid-template-columns: auto auto;
-    grid-row-gap: 0.25em;
-    padding: 0.5em;
-}
-
-.formContainer label {
+.inputWrapper > label {
     display: flex;
-    align-items: center;
     justify-content: flex-end;
-    padding: 0 0.25em;
+    align-items: center;
+    padding-right: 0.5em;
+}
+
+.inputWrapper input[type="range"] {
+    margin: 1.5em 0;
+}
+
+.buttonWrapper {
+    display: flex;
+    padding: 0 0.5em;
+}
+
+.buttonWrapper.left {
+    justify-content: flex-end;
+}
+
+#errorSpan {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    margin: 0.25em;
+}
+
+.footer {
+    font-size: 0.7em;
+    color: #eee;
+}
+
+.footer a {
+    color: #99f;
+}
+
+.footer .tag {
+    font-size: 0.8em;
+}
+
+#errorSpan {
+    color: #600;
+    background-color: #fee;
+}
+
+.inputWrapper label {
     font-weight: bold;
 }
 
-.formContainer div.right {
-    display: flex;
-    justify-content: flex-start;
-    padding: 0 0.25em;
-}
-
-.formContainer div.left {
-    display: flex;
-    justify-content: flex-end;
-    padding: 0 0.25em;
-}
-
-.formContainer input[type="button"] {
-    padding: 0;
-}
-
-.formContainer .errorSpan {
-    color: #966;
-    grid-column: 1 / span 2;
-    display: flex;
-    justify-content: center;
-    height: 1em;
-}
-
-.formContainer .red {
+label[for="inR"] {
     color: #900;
 }
 
-.formContainer .blue {
+label[for="outR"] {
     color: #006;
 }
 
-.formContainer .green {
+label[for="mPos"] {
     color: #060;
-}
-
-
-.formContainer input[type="number"] {
-    width: 3em;
-}
-
-
-/** stupid webkit */
-input[type='range'].green,
-input[type='range'].green::-webkit-slider-runnable-track,
-input[type='range'].green::-webkit-slider-thumb {
-    -webkit-appearance: none;
-}
-input[type='range'].green::-webkit-slider-runnable-track {
-    height: 2px;
-    background: #060;
-}
-
-input[type='range'].green::-webkit-slider-thumb {
-    position: relative;
-    height: 12px;
-    width: 12px;
-    margin-top: -6px;
-    background: #999;
-    border-radius: 50%;
-}
-
-
-
-/** FF */
-input[type="range"].green::-moz-range-progress {
-    background-color: #060; 
-}
-
-input[type="range"].green::-moz-range-track {  
-    background-color: #999;
-}
-  
-/** IE */
-input[type="range"].green::-ms-fill-lower {
-    background-color: #060; 
-}
-input[type="range"].green::-ms-fill-upper {  
-    background-color: #999;
-}
-
-@media screen and (min-width: 520px) {
-    #drawingCanvas {
-        width: 512px;
-    }
 }
