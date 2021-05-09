@@ -35,6 +35,7 @@ const startCalculateDots = (canvas) => {
     let outR = Math.min(canvas.width, canvas.height) / 2 - 1;
     let midPoint = point(canvas.width / 2, canvas.height / 2);
     let radiusRatio = userInput.inR / userInput.outR;
+    let deltaRatio = userInput.inR / (userInput.outR - userInput.inR);
     let inR = outR * radiusRatio;
     let mRadius = inR * userInput.mPos;
 
@@ -51,7 +52,7 @@ const startCalculateDots = (canvas) => {
         let calcFinished = false;
         for (inRev = calc_lastCalcInRev; inRev <= (calc_lastCalcInRev + calc_revPerCycle); inRev += calc_revInc) {
             inRev = Math.round(inRev * 100) / 100;
-            outRev = inRev * radiusRatio;
+            outRev = inRev * deltaRatio;
 
             let inMidPoint = calculateMidInnerCircle(midPoint, inR, outR, outRev);
 
@@ -76,7 +77,7 @@ const startCalculateDots = (canvas) => {
     return calc_revToDot;
 };
 
-const rps = 1;
+const rps = 0.7;//rev per second of inner circle
 
 var start;
 var intPaint;
@@ -92,12 +93,13 @@ const startOver = (canvas, revToDots) => {
         let outR = Math.min(canvas.width, canvas.height) / 2 - 1;
         let midPoint = point(canvas.width / 2, canvas.height / 2);
         let radiusRatio = userInput.inR / userInput.outR;
+        let deltaRatio = userInput.inR / (userInput.outR - userInput.inR);
         let inR = outR * radiusRatio;
         let mRadius = inR * userInput.mPos;
 
         let roundEltime = Math.round(timeStamp - start);
         let inRev = rps * roundEltime / 1000;
-        let outRev = inRev * radiusRatio;
+        let outRev = inRev * deltaRatio;
 
         let cToC = outR - inR;
         let inX = midPoint.x + cToC * sinByRev(-outRev);
@@ -147,6 +149,7 @@ const exportImage = (format) => {
     let outR = Math.min(canvas.width, canvas.height) / 2 - 1;
     let midPoint = point(canvas.width / 2, canvas.height / 2);
     let radiusRatio = userInput.inR / userInput.outR;
+    let deltaRatio = userInput.inR / (userInput.outR - userInput.inR);
     let inR = outR * radiusRatio;
     let mRadius = inR * userInput.mPos;
 
@@ -166,7 +169,7 @@ const exportImage = (format) => {
     do {
         inRev += 0.01;
         inRev = Math.round(inRev * 100) / 100;
-        outRev = inRev * radiusRatio;
+        outRev = inRev * deltaRatio;
 
         context.moveTo(markerPoint.x, markerPoint.y);
 
@@ -176,7 +179,7 @@ const exportImage = (format) => {
         context.lineTo(markerPoint.x, markerPoint.y);
 
         inRev = Math.round(inRev * 100) / 100;
-        outRev = inRev * radiusRatio;
+        outRev = inRev * deltaRatio;
     } while (inRev % 1 != 0 || outRev % 1 != 0);
     context.stroke()
 
