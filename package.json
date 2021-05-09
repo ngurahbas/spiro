@@ -19,6 +19,8 @@
   },
   "homepage": "https://github.com/ngunpm rahbas/spiro#readme",
   "devDependencies": {
+    "ts-loader": "^9.1.2",
+    "typescript": "^4.2.4",
     "webpack": "^5.35.1",
     "webpack-cli": "^4.6.0",
     "webpack-dev-server": "^3.11.2"
