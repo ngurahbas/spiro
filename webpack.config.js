@@ -3,6 +3,14 @@ const path = require('path');
 module.exports = {
     entry: {
         legacy: './src/legacy.js',
+        index: './src/index.ts',
+    },
+    module: {
+        rules: [{
+            test: /\.tsx?$/,
+            use: 'ts-loader',
+            exclude: /node_modules/,
+        }],
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
