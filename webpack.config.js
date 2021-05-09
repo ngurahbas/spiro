@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
     entry: {
-        index: './src/index.js',
+        legacy: './src/index.js',
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
