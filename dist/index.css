@@ -1,0 +1,140 @@
+:root {
+    font-size: 16px;
+    font-family: sans-serif;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
+div.root {
+    position: relative;
+    min-height: 100vh;
+    min-height: calc(var(--vh, 1vh) * 100);
+    --footer-height: 1.2rem;
+}
+
+div.content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-bottom: var(--footer-height);
+}
+
+div.footer{
+    background-color: #333;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: var(--footer-height);
+    display: flex;
+    padding-top: 0.4rem;
+    justify-content: center;
+}
+
+div.content > * {
+    flex: 0 1 auto;
+    padding: 0.25rem;
+}
+
+div.content > .canvasWrapper {
+    width: min(100%, 512px);
+}
+
+div.content > .formWrapper {
+    display: flex;
+    align-items: center;
+    width: min(100%, 30rem);
+}
+
+.formWrapper > form {
+    width: 100%;
+}
+
+#drawingCanvas {
+    width: 100%;
+}
+
+.inputWrapper {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.footer ul {
+    padding: 0;
+    margin: 0;
+}
+
+.footer ul li {
+    display: inline;
+}
+
+.footer ul li::before {
+    content: '🐚';
+}
+
+.inputWrapper input[type="number"] {
+    width: 3em;
+    height: 1.2em;
+}
+
+.inputWrapper > label {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 0.5em;
+}
+
+.inputWrapper input[type="range"] {
+    margin: 1.5em 0;
+}
+
+.buttonWrapper {
+    display: flex;
+    padding: 0 0.5em;
+}
+
+.buttonWrapper.left {
+    justify-content: flex-end;
+}
+
+#errorSpan {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    margin: 0.25em;
+}
+
+.footer {
+    font-size: 0.5em;
+    color: #eee;
+}
+
+.footer a {
+    color: #99f;
+}
+
+.footer .tag {
+    font-size: 0.8em;
+}
+
+#errorSpan {
+    color: #600;
+    background-color: #fee;
+}
+
+.inputWrapper label {
+    font-weight: bold;
+}
+
+label[for="inR"] {
+    color: #900;
+}
+
+label[for="outR"] {
+    color: #006;
+}
+
+label[for="mPos"] {
+    color: #060;
+}
