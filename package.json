@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "buildWepack": "webpack --mode=production",
-    "buildTailwind": "tailwindcss-cli build -o dist/tailwind.css",
+    "buildTailwind": "tailwindcss-cli build ./src/tailwind.css -o dist/tailwind.css",
     "build": "npm-run-all -p -r buildWepack buildTailwind",
     "serve": "webpack serve --mode=development --host 0.0.0.0"
   },

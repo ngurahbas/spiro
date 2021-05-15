@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+
+
+.blue {
+    background: #00f;
+}
+
+@tailwind utilities;
