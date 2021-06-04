@@ -4,7 +4,7 @@
   "description": "",
   "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "builddev": "webpack --mode=development",
     "buildprod": "webpack --mode=production",
     "build": "npm-run-all -p -r buildWebpack buildTailwind",
@@ -20,7 +20,9 @@
     "url": "https://github.com/ngurahbas/spiro/issues"
   },
   "devDependencies": {
+    "@types/mocha": "^8.2.2",
     "css-loader": "^5.2.6",
+    "mocha": "^8.4.0",
     "npm-run-all": "^4.1.5",
     "postcss": "^8.3.0",
     "postcss-loader": "^5.3.0",
