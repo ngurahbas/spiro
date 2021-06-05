@@ -8,12 +8,11 @@ const testDom = new JSDOM(
 
 let canvasElement = testDom.window.document.getElementById('canvas') as HTMLCanvasElement;
 
-describe("Getting model form Canvas Element", () => {
+describe("getCanvasModel", () => {
     it("should return CanvasModel", () => {
         let canvasModel = getCanvasModel(canvasElement);
         assert.isNotNull(canvasModel);
         assert.equal(canvasModel.width, 1024);
         assert.equal(canvasModel.height, 1024);
-        console.log(canvasModel.context);
     });
 });
