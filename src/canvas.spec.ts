@@ -1,4 +1,4 @@
-import assert = require("assert");
+var assert = require('chai').assert;
 import { JSDOM } from "jsdom";
 import { CanvasModel, getCanvasModel } from "./canvas";
 
@@ -11,8 +11,9 @@ let canvasElement = testDom.window.document.getElementById('canvas') as HTMLCanv
 describe("Getting model form Canvas Element", () => {
     it("should return CanvasModel", () => {
         let canvasModel = getCanvasModel(canvasElement);
-        assert(canvasModel != null);
-        assert(canvasModel.height == 1024);
-        assert(canvasModel.width == 1024);
+        assert.isNotNull(canvasModel);
+        assert.equal(canvasModel.width, 1024);
+        assert.equal(canvasModel.height, 1024);
+        console.log(canvasModel.context);
     });
 });

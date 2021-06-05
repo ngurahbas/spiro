@@ -1,4 +1,4 @@
-import assert = require("assert");
+var assert = require('chai').assert;
 import { sinByRev, cosByRev } from "./math";
 
 describe("trigonometry constraint", () => {
@@ -8,7 +8,7 @@ describe("trigonometry constraint", () => {
             let refSinValue = sinByRev(x);
             let tolerance = 0.000_000_001;
             for (let i = 1; i <= 10; i++) {
-                assert(Math.abs(refSinValue - sinByRev(i + x)) < tolerance, "i = " + i);
+                assert.isAtMost(Math.abs(sinByRev(i + x) - refSinValue), tolerance);
             }
         });
     });
@@ -17,7 +17,7 @@ describe("trigonometry constraint", () => {
             let refCosValue = cosByRev(x);
             let tolerance = 0.000_000_001;
             for (let i = 1; i <= 10; i++) {
-                assert(Math.abs(refCosValue - cosByRev(i + x)) < tolerance, "i = " + i);
+                assert.isAtMost(Math.abs(cosByRev(i + x) - refCosValue), tolerance);
             }
         });
     });
