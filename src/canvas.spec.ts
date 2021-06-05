@@ -1,6 +1,6 @@
 var assert = require('chai').assert;
 import { JSDOM } from "jsdom";
-import { CanvasModel, getCanvasModel } from "./canvas";
+import { CanvasController } from "./canvas";
 
 const testDom = new JSDOM(
     '<html><head></head><body><canvas id="canvas" width="1024" height="1024"></body></html>'
@@ -8,11 +8,11 @@ const testDom = new JSDOM(
 
 let canvasElement = testDom.window.document.getElementById('canvas') as HTMLCanvasElement;
 
-describe("getCanvasModel", () => {
-    it("should return CanvasModel", () => {
-        let canvasModel = getCanvasModel(canvasElement);
-        assert.isNotNull(canvasModel);
-        assert.equal(canvasModel.width, 1024);
-        assert.equal(canvasModel.height, 1024);
+describe('constructor of CanvasObjectController accept canvas element as input', () => {
+    it('should create new valid object', () => {
+        let canvasController = new CanvasController(canvasElement);
+        assert.equal(canvasController.width, 1024);
+        assert.equal(canvasController.height, 1024);
     });
 });
+
