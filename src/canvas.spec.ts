@@ -16,3 +16,16 @@ describe('constructor of CanvasObjectController accept canvas element as input',
     });
 });
 
+describe('Canvas Controller Behaviour', () => {
+    let canvasController = new CanvasController(canvasElement);
+    describe('draw single point', () => {
+        it('should draw successfully', () => {
+            let before = canvasController.getPixel(0, 0);
+            canvasController.draw({ x: 0, y: 0 });
+            let after = canvasController.getPixel(0, 0);
+            assert.equal(before[3], 0);
+            assert.equal(after[3], 255);
+        });
+    });
+});
+
