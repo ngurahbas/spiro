@@ -1,4 +1,4 @@
-var assert = require('chai').assert;
+import { assert } from "chai";
 import { JSDOM } from "jsdom";
 import { CanvasController } from "./canvas";
 

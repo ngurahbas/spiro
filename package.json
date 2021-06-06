@@ -19,6 +19,7 @@
     "url": "https://github.com/ngurahbas/spiro/issues"
   },
   "devDependencies": {
+    "@types/chai": "^4.2.18",
     "@types/jsdom": "^16.2.10",
     "@types/mocha": "^8.2.2",
     "canvas": "^2.8.0",

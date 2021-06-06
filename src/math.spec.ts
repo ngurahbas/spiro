@@ -1,4 +1,4 @@
-var assert = require('chai').assert;
+import { assert } from "chai";
 import { sinByRev, cosByRev } from "./math";
 
 describe("trigonometry constraint", () => {
