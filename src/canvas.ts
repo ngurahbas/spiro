@@ -1,4 +1,4 @@
-import { Point } from "./data";
+import { FillAndStroke, Point } from "./data";
 
 export interface CanvasReference {
     width: number;
@@ -25,10 +25,22 @@ export class CanvasController implements CanvasReference {
         this.context = element.getContext("2d");
     }
 
-    drawPoint(point: Point): void {
+    drawPoint(point: Point, fillAndStroke?: FillAndStroke): void {
+        let oldFillStyle = this.context.fillStyle;
+        let oldStrokeStyle = this.context.strokeStyle;
+
+        if (fillAndStroke) {
+            this.context.fillStyle = fillAndStroke.fillStyle;
+            this.context.strokeStyle = fillAndStroke.strokeStyle;
+        }
+
         this.context.beginPath();
         this.context.rect(point.x, point.y, 1, 1);
         this.context.fill();
+        this.context.stroke();
+
+        this.context.fillStyle = oldFillStyle;
+        this.context.strokeStyle = oldStrokeStyle;
     }
 
     clear() {
