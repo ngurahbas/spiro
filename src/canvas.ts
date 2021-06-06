@@ -1,4 +1,4 @@
-import { FillAndStroke, Point } from "./data";
+import { Circle, FillAndStroke, Point } from "./data";
 
 export interface CanvasReference {
     width: number;
@@ -36,6 +36,23 @@ export class CanvasController implements CanvasReference {
 
         this.context.beginPath();
         this.context.rect(point.x, point.y, 1, 1);
+        this.context.fill();
+
+        this.context.fillStyle = oldFillStyle;
+        this.context.strokeStyle = oldStrokeStyle;
+    }
+
+    drawCircle(circle: Circle, fillAndStroke?: FillAndStroke): void {
+        let oldFillStyle = this.context.fillStyle;
+        let oldStrokeStyle = this.context.strokeStyle;
+
+        if (fillAndStroke) {
+            this.context.fillStyle = fillAndStroke.fillStyle;
+            this.context.strokeStyle = fillAndStroke.strokeStyle;
+        }
+
+        this.context.beginPath();
+        this.context.arc(circle.x, circle.y, circle.r, 0, 2 * Math.PI);
         this.context.fill();
         this.context.stroke();
 
