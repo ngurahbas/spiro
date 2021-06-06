@@ -25,7 +25,7 @@ export class CanvasController implements CanvasReference {
         this.context = element.getContext("2d");
     }
 
-    draw(point: Point): void {
+    drawPoint(point: Point): void {
         this.context.beginPath();
         this.context.rect(point.x, point.y, 1, 1);
         this.context.fill();

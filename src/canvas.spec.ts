@@ -20,7 +20,7 @@ describe('Canvas Controller Behaviour', () => {
     let canvasController = new CanvasController(canvasElement);
     it('should draw single pixel successfully', () => {
         let before = canvasController.getPixel(0, 0);
-        canvasController.draw({ x: 0, y: 0 });
+        canvasController.drawPoint({ x: 0, y: 0 });
         let after = canvasController.getPixel(0, 0);
         assert.equal(before[3], 0);
         assert.equal(after[3], 255);
