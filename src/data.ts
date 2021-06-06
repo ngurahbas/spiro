@@ -13,7 +13,7 @@ export interface RotatingCircle extends Circle {
     innerR: number;
 }
 
-export interface fillAndStroke {
+export interface FillAndStroke {
     fillStyle: string | CanvasGradient | CanvasPattern;
     strokeStyle: string | CanvasGradient | CanvasPattern;
 }
