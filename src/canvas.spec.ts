@@ -25,5 +25,10 @@ describe('Canvas Controller Behaviour', () => {
         assert.equal(before[3], 0);
         assert.equal(after[3], 255);
     });
+    it("should clear canvas successfully", () => {
+        canvasController.clear();
+        let after = canvasController.getPixel(0, 0);
+        assert.equal(after[3], 0);
+    });
 });
 

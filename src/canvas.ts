@@ -6,7 +6,7 @@ export interface CanvasReference {
     context: RenderingContext;
 }
 
-export class CanvasController implements CanvasReference{
+export class CanvasController implements CanvasReference {
     width: number;
     height: number;
     context: CanvasRenderingContext2D;
@@ -29,6 +29,10 @@ export class CanvasController implements CanvasReference{
         this.context.beginPath();
         this.context.rect(point.x, point.y, 1, 1);
         this.context.fill();
+    }
+
+    clear() {
+        this.context.clearRect(0, 0, this.width, this.height);
     }
 
     getPixel(x: number, y: number): Uint8ClampedArray {
