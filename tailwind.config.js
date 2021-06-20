@@ -1,9 +1,9 @@
+const isProduction = process.argv[process.argv.indexOf('--mode') + 1] === 'production';
 module.exports = {
   purge: {
-    enabled:true,
+    enabled: isProduction,
     content: [
-      './dist/*.html',
-      './src/**/*.{js,ts}',
+      './src/**/*.{html,js,ts}',
     ]
   },
   darkMode: false, // or 'media' or 'class'
