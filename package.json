@@ -5,9 +5,10 @@
   "private": true,
   "scripts": {
     "test": "mocha",
-    "builddev": "webpack --mode=development",
-    "buildprod": "webpack --mode=production",
-    "serve": "webpack serve --mode=development --host 0.0.0.0"
+    "builddev": "webpack --mode development",
+    "buildprod": "webpack --mode production",
+    "serveDev": "webpack serve --mode development --host 0.0.0.0",
+    "serveProd": "webpack serve --mode production --host 0.0.0.0"
   },
   "repository": {
     "type": "git",
