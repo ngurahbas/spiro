@@ -1,5 +1,6 @@
 @tailwind base;
 @tailwind components;
+@tailwind utilities;
 
 .theme-color-1 {
     @apply bg-white text-gray-900;
@@ -40,5 +41,3 @@ header {
 footer {
     @apply col-span-2 theme-color-2;
 }
-
-@tailwind utilities;
