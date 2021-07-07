@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: {
-        index : ['./src/ts/index.ts', './src/css/index.css'],
+        index: ['./src/tsx/index.tsx', './src/css/index.css'],
     },
     module: {
         rules: [{
@@ -32,7 +32,7 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template:'./src/html/index.html',
+            template: './src/html/index.html',
             chunks: ['index']
         })
     ],
