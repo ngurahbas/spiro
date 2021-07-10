@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-import { MainForm } from "./app";
+import { MainForm } from "./mainform";
 
 ReactDOM.render(
     <MainForm staticCircleRadius={4} />,
