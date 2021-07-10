@@ -3,15 +3,15 @@
 @tailwind utilities;
 
 .theme-color-1 {
-    @apply bg-white text-gray-900;
+    @apply bg-gray-100;
 }
 
 .theme-color-2 {
-    @apply bg-gray-800 text-gray-300;
+    @apply bg-gray-200 text-black;
 }
 
 .theme-color-3 {
-    @apply bg-gray-600 text-black;
+    @apply bg-white text-black;
 }
 
 body {
@@ -19,25 +19,29 @@ body {
 }
 
 .mainwrapper {
-    @apply container mx-auto grid grid-cols-2 gap-2;
+    @apply container mx-auto mt-2 grid grid-cols-2 shadow-md theme-color-3;
 }
 
 header {
-    @apply col-span-2 theme-color-2;
+    @apply col-span-2 p-4 theme-color-2;
 }
 
 .dynamic-grid {
-    @apply col-span-2 md:col-span-1 border-gray-800;
-}
-
-.dynamic-grid:last-of-type {
-    @apply border-t-2 md:border-l-2 md:border-t-0;
+    @apply col-span-2 md:col-span-1 m-1;
 }
 
 .dynamic-grid canvas {
-    @apply w-full h-full;
+    @apply w-full h-full border-gray-300 border-2;
 }
 
 footer {
     @apply col-span-2 theme-color-2;
+}
+
+.title {
+    @apply text-2xl font-bold;
+}
+
+.sub-title {
+    @apply text-xs align-bottom;
 }
