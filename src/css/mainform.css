@@ -1,3 +1,23 @@
+form {
+    @apply p-4 border-2 border-gray-300;
+}
+
 .input-row {
-    @apply w-full;
+    @apply w-full mb-1 p-1 md:flex md:items-center;
+}
+
+.input-label {
+    @apply md:pr-1 md:text-right md:w-1/2 font-bold text-gray-800;
+}
+
+.input-value {
+    @apply md:w-1/2;
+}
+
+.input-value input {
+    @apply w-2/3 md:w-1/2 border-2 border-gray-700;
+}
+
+.action-button {
+    @apply mr-2 px-2 rounded bg-gray-800 hover:bg-gray-500 text-white font-bold;
 }

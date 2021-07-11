@@ -3,28 +3,24 @@
 @tailwind components;
 @tailwind utilities;
 
-.theme-color-1 {
-    @apply bg-gray-100;
-}
-
-.theme-color-2 {
+.heading-wrapper-color {
     @apply bg-gray-200 text-black;
 }
 
-.theme-color-3 {
+.main-wrapper-color {
     @apply bg-white text-black;
 }
 
 body {
-    @apply theme-color-1;
+    @apply bg-gray-100;
 }
 
-.mainwrapper {
-    @apply container mx-auto mt-2 grid grid-cols-2 shadow-md theme-color-3;
+.main-wrapper {
+    @apply container mx-auto mt-2 grid grid-cols-2 shadow-md main-wrapper-color;
 }
 
 header {
-    @apply col-span-2 p-4 theme-color-2;
+    @apply col-span-2 p-4 heading-wrapper-color;
 }
 
 .dynamic-grid {
@@ -36,7 +32,7 @@ header {
 }
 
 footer {
-    @apply col-span-2 theme-color-2;
+    @apply col-span-2 heading-wrapper-color;
 }
 
 .title {
