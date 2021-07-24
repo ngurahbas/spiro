@@ -45,7 +45,7 @@ export class MainForm extends React.Component<MainFormProps, MainFormState> {
                         <label htmlFor="innerCircleRadius">Inner circle radius</label>
                     </div>
                     <div className="input-value">
-                        <input name="innerCircleRadius" type="number" value={this.props.innerCircleRadius} onChange={this.handleChange}/>
+                        <input name="innerCircleRadius" type="number" value={this.props.innerCircleRadius} onChange={this.handleChange} />
                     </div>
                 </div>
                 <div className="input-row">
@@ -53,7 +53,7 @@ export class MainForm extends React.Component<MainFormProps, MainFormState> {
                         <label htmlFor="innerCircleMidToPen">Pen distance</label>
                     </div>
                     <div className="input-value">
-                        <input name="innerCircleMidToPen" type="number" value={this.props.innerCircleMidToPen} onChange={this.handleChange}/>
+                        <input name="innerCircleMidToPen" type="number" value={this.props.innerCircleMidToPen} onChange={this.handleChange} />
                     </div>
                 </div>
                 <div className="input-row">
