@@ -22,8 +22,11 @@ export class MainForm extends React.Component<MainFormProps, MainFormState> {
     }
 
     handleChange(event: React.FormEvent<HTMLInputElement>) {
-        console.log('(event) = ', event.currentTarget.value);
-        this.setState({ staticCircleRadius: parseInt(event.currentTarget.value) });
+        let value = event.currentTarget.value;
+        let name = event.currentTarget.name;
+        this.setState({
+            [name]: value
+        });
     }
 
     render() {
