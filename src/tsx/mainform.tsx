@@ -64,7 +64,7 @@ function NumberEntry(props: NumberEntryProps) {
                 <label htmlFor={props.name}>{props.label}</label>
             </div>
             <div className="input-value">
-                <input name={props.name} type="number" value={props.value} onChange={props.onChange} />
+                <input name={props.name} type="number" value={props.value} onChange={props.onChange} step={10}/>
             </div>
         </div>
     );
