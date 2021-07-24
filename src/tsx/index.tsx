@@ -4,6 +4,6 @@ import * as ReactDOM from "react-dom";
 import { MainForm } from "./mainform";
 
 ReactDOM.render(
-    <MainForm staticCircleRadius={10}/>,
+    <MainForm staticCircleRadius={500} innerCircleRadius={230} innerCircleMidToPen={100}/>,
     document.getElementById("form-wrapper")
 );

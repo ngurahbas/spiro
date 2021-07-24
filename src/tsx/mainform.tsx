@@ -58,7 +58,6 @@ interface NumberEntryProps {
 }
 
 function NumberEntry(props: NumberEntryProps) {
-    console.log("number entry");
     return (
         <div className="input-row">
             <div className="input-label">
