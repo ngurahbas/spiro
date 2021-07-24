@@ -32,30 +32,12 @@ export class MainForm extends React.Component<MainFormProps, MainFormState> {
     render() {
         return (
             <form action="">
-                <div className="input-row">
-                    <div className="input-label">
-                        <label htmlFor="staticCircleRadius">Static circle radius</label>
-                    </div>
-                    <div className="input-value">
-                        <input name="staticCircleRadius" type="number" value={this.state.staticCircleRadius} onChange={this.handleChange} />
-                    </div>
-                </div>
-                <div className="input-row">
-                    <div className="input-label">
-                        <label htmlFor="innerCircleRadius">Inner circle radius</label>
-                    </div>
-                    <div className="input-value">
-                        <input name="innerCircleRadius" type="number" value={this.props.innerCircleRadius} onChange={this.handleChange} />
-                    </div>
-                </div>
-                <div className="input-row">
-                    <div className="input-label">
-                        <label htmlFor="innerCircleMidToPen">Pen distance</label>
-                    </div>
-                    <div className="input-value">
-                        <input name="innerCircleMidToPen" type="number" value={this.props.innerCircleMidToPen} onChange={this.handleChange} />
-                    </div>
-                </div>
+                <NumberEntry name="staticCircleRadius" label="Static circle radius"
+                    value={this.state.staticCircleRadius} onChange={this.handleChange} />
+                <NumberEntry name="innerCircleRadius" label="Inner circle radius"
+                    value={this.state.innerCircleRadius} onChange={this.handleChange} />
+                <NumberEntry name="innerCircleMidToPen" label="Pen distance"
+                    value={this.state.innerCircleMidToPen} onChange={this.handleChange} />
                 <div className="input-row">
                     <div className="input-label" />
                     <div className="input-value">
@@ -66,4 +48,25 @@ export class MainForm extends React.Component<MainFormProps, MainFormState> {
             </form>
         );
     }
+}
+
+interface NumberEntryProps {
+    name: string;
+    label: string;
+    value: number;
+    onChange: { (event: React.FormEvent<HTMLInputElement>): void; };
+}
+
+function NumberEntry(props: NumberEntryProps) {
+    console.log("number entry");
+    return (
+        <div className="input-row">
+            <div className="input-label">
+                <label htmlFor={props.name}>{props.label}</label>
+            </div>
+            <div className="input-value">
+                <input name={props.name} type="number" value={props.value} onChange={props.onChange} />
+            </div>
+        </div>
+    );
 }
