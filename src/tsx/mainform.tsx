@@ -22,7 +22,7 @@ export class MainForm extends React.Component<MainFormProps, MainFormState> {
     }
 
     handleChange(event: React.FormEvent<HTMLInputElement>) {
-        let value = event.currentTarget.value;
+        let value = event.currentTarget.type == "number" ? Number.parseInt(event.currentTarget.value) : event.currentTarget.value;
         let name = event.currentTarget.name;
         this.setState({
             [name]: value
@@ -38,7 +38,6 @@ export class MainForm extends React.Component<MainFormProps, MainFormState> {
                     </div>
                     <div className="input-value">
                         <input name="staticCircleRadius" type="number" value={this.state.staticCircleRadius} onChange={this.handleChange} />
-                        <span className="assertion">{this.state.staticCircleRadius}</span>
                     </div>
                 </div>
                 <div className="input-row">
@@ -47,7 +46,6 @@ export class MainForm extends React.Component<MainFormProps, MainFormState> {
                     </div>
                     <div className="input-value">
                         <input name="innerCircleRadius" type="number" value={this.props.innerCircleRadius} onChange={this.handleChange}/>
-                        <span className="assertion">{this.state.innerCircleRadius}</span>
                     </div>
                 </div>
                 <div className="input-row">
@@ -56,7 +54,6 @@ export class MainForm extends React.Component<MainFormProps, MainFormState> {
                     </div>
                     <div className="input-value">
                         <input name="innerCircleMidToPen" type="number" value={this.props.innerCircleMidToPen} onChange={this.handleChange}/>
-                        <span className="assertion">{this.state.innerCircleMidToPen}</span>
                     </div>
                 </div>
                 <div className="input-row">

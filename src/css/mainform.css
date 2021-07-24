@@ -21,7 +21,3 @@ form {
 .action-button {
     @apply mr-2 px-2 rounded bg-gray-800 hover:bg-gray-500 text-white font-bold;
 }
-
-.assertion {
-    @apply ml-2 text-red-900;
-}
