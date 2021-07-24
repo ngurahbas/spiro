@@ -7,7 +7,7 @@ form {
 }
 
 .input-label {
-    @apply md:pr-1 md:text-right md:w-1/2 font-bold text-gray-800;
+    @apply md:pr-2 md:text-right md:w-1/2 font-bold text-gray-800;
 }
 
 .input-value {
@@ -20,4 +20,8 @@ form {
 
 .action-button {
     @apply mr-2 px-2 rounded bg-gray-800 hover:bg-gray-500 text-white font-bold;
+}
+
+.assertion {
+    @apply ml-2 text-red-900;
 }
