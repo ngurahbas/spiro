@@ -1,8 +1,8 @@
-import * as React from "react"
+import * as React from "react";
 
 export interface MainFormProps extends MainFormState {
-    animateAction?: { (): void };
-    renderAction?: { (): void };
+    animateAction?: { (staticCircleRadius?: number, innerCircleRadius?: number, innerCircleMidToPen?: number): void };
+    renderAction?: { (staticCircleRadius?: number, innerCircleRadius?: number, innerCircleMidToPen?: number): void };
 }
 
 interface MainFormState {
@@ -12,7 +12,6 @@ interface MainFormState {
 }
 
 export class MainForm extends React.Component<MainFormProps, MainFormState> {
-
     constructor(props: MainFormProps) {
         super(props);
         this.state = {
