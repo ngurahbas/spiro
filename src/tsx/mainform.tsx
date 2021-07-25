@@ -1,15 +1,15 @@
 import * as React from "react"
 
-export interface MainFormProps {
-    staticCircleRadius?: number;
-    innerCircleRadius?: number;
-    innerCircleMidToPen?: number;
+export interface MainFormProps extends MainFormState {
     animateAction?: { (): void };
     renderAction?: { (): void };
 }
 
-interface MainFormState extends MainFormProps { }
-
+interface MainFormState {
+    staticCircleRadius?: number;
+    innerCircleRadius?: number;
+    innerCircleMidToPen?: number;
+}
 
 export class MainForm extends React.Component<MainFormProps, MainFormState> {
 
