@@ -22,12 +22,12 @@ export class MainForm extends React.Component<MainFormProps, MainFormState> {
         this.handleChange = this.handleChange.bind(this);
     }
 
-    handleChange(event: React.FormEvent<HTMLInputElement>) {
-        let value = event.currentTarget.type == "number" ? Number.parseInt(event.currentTarget.value) : event.currentTarget.value;
+    handleChange(event: React.ChangeEvent<HTMLInputElement>) {
         let name = event.currentTarget.name;
-        this.setState({
-            [name]: value
-        });
+        let type = event.currentTarget.type;
+        let value = type == "number" && event.currentTarget.value != "" 
+            ? parseInt(event.currentTarget.value) : event.currentTarget.value;
+        this.setState({ ...this.state, [name]: value });
     }
 
     render() {
