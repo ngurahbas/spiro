@@ -1,23 +1,23 @@
 import * as React from "react";
 
 export interface MainFormProps extends MainFormState {
-    animateAction?: { (staticCircleRadius?: number, innerCircleRadius?: number, innerCircleMidToPen?: number): void };
-    renderAction?: { (staticCircleRadius?: number, innerCircleRadius?: number, innerCircleMidToPen?: number): void };
+    animateAction?: { (staticR?: number, rotatingR?: number, rotatingMidR?: number): void };
+    renderAction?: { (staticR?: number, rotatingR?: number, rotatingMidR?: number): void };
 }
 
 interface MainFormState {
-    staticCircleRadius?: number;
-    innerCircleRadius?: number;
-    innerCircleMidToPen?: number;
+    staticR?: number;
+    rotatingR?: number;
+    rotatingMidR?: number;
 }
 
 export class MainForm extends React.Component<MainFormProps, MainFormState> {
     constructor(props: MainFormProps) {
         super(props);
         this.state = {
-            staticCircleRadius: props.staticCircleRadius,
-            innerCircleRadius: props.innerCircleRadius,
-            innerCircleMidToPen: props.innerCircleMidToPen,
+            staticR: props.staticR,
+            rotatingR: props.rotatingR,
+            rotatingMidR: props.rotatingMidR,
         };
         this.handleChange = this.handleChange.bind(this);
     }
@@ -33,12 +33,12 @@ export class MainForm extends React.Component<MainFormProps, MainFormState> {
     render() {
         return (
             <form action="">
-                <NumberEntry name="staticCircleRadius" label="Static circle radius"
-                    value={this.state.staticCircleRadius} onChange={this.handleChange} />
-                <NumberEntry name="innerCircleRadius" label="Inner circle radius"
-                    value={this.state.innerCircleRadius} onChange={this.handleChange} />
-                <NumberEntry name="innerCircleMidToPen" label="Pen distance"
-                    value={this.state.innerCircleMidToPen} onChange={this.handleChange} />
+                <NumberEntry name="staticR" label="Static circle radius"
+                    value={this.state.staticR} onChange={this.handleChange} />
+                <NumberEntry name="rotatingR" label="Inner circle radius"
+                    value={this.state.rotatingR} onChange={this.handleChange} />
+                <NumberEntry name="rotatingMidR" label="Pen distance"
+                    value={this.state.rotatingMidR} onChange={this.handleChange} />
                 <div className="input-row">
                     <div className="input-label" />
                     <div className="input-value">

@@ -5,14 +5,14 @@ import { MainForm } from "./mainform";
 import { SpiroCanvas } from "./spirocanvas";
 
 ReactDOM.render(
-    <MainForm staticCircleRadius={500} innerCircleRadius={230} innerCircleMidToPen={100}/>,
+    <MainForm staticR={500} rotatingR={230} rotatingMidR={100}/>,
     document.getElementById("form-wrapper")
 );
 
 function animate(staticCircleRadius?: number, innerCircleRadius?: number, innerCircleMidToPen?: number) {
     ReactDOM.render(
-        <SpiroCanvas staticCircleRadius={staticCircleRadius} 
-            innerCircleRadius={innerCircleRadius} innerCircleMidToPen={innerCircleMidToPen}/>,
+        <SpiroCanvas staticR={staticCircleRadius} 
+            rotatingR={innerCircleRadius} rotatingMidR={innerCircleMidToPen}/>,
         document.getElementById("canvas-wrapper")
     );
 }
