@@ -4,6 +4,8 @@ export interface MainFormProps {
     staticCircleRadius?: number;
     innerCircleRadius?: number;
     innerCircleMidToPen?: number;
+    animateAction?: { (): void };
+    renderAction?: { (): void };
 }
 
 interface MainFormState extends MainFormProps { }
@@ -64,7 +66,7 @@ function NumberEntry(props: NumberEntryProps) {
                 <label htmlFor={props.name}>{props.label}</label>
             </div>
             <div className="input-value">
-                <input name={props.name} type="number" value={props.value} onChange={props.onChange} step={10}/>
+                <input name={props.name} type="number" value={props.value} onChange={props.onChange} step={10} />
             </div>
         </div>
     );
