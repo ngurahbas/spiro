@@ -1,21 +1,21 @@
 form {
-    @apply p-4 border-2 border-gray-300;
+    @apply p-1 xl:p-4 border-2 border-gray-300;
 }
 
 .input-row {
-    @apply w-full mb-1 p-1 md:flex md:items-center;
+    @apply w-full mb-1 p-1 flex xl:items-center;
 }
 
 .input-label {
-    @apply md:pr-2 md:text-right md:w-1/2 font-bold text-gray-800;
+    @apply pr-2 text-right w-1/2 font-bold text-gray-800;
 }
 
 .input-value {
-    @apply md:w-1/2;
+    @apply w-1/2;
 }
 
 .input-value input {
-    @apply w-2/3 md:w-1/2 border-2 border-gray-700;
+    @apply w-40 border-2 border-gray-700;
 }
 
 .action-button {
