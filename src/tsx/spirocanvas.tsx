@@ -9,6 +9,8 @@ interface SpiroCanvasState {
 }
 
 export class SpiroCanvas extends React.Component<SpiroCanvasProps, SpiroCanvasState> {
+    canvas: React.Ref<HTMLCanvasElement>;
+    
     constructor(props: SpiroCanvasProps) {
         super(props);
         this.state = {
@@ -19,8 +21,9 @@ export class SpiroCanvas extends React.Component<SpiroCanvasProps, SpiroCanvasSt
     }
 
     render() {
+        let element = <canvas width="2048" height="2048" ref={this.canvas}></canvas>;
         return (
-            <canvas width="2048" height="2048"></canvas>
+            element
         );
     }
 }
