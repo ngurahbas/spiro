@@ -32,6 +32,7 @@ export class MainForm extends React.Component<MainFormProps, MainFormState> {
                 rotatingMidR: props.rotatingMidR, canvasWidth: 1024
             });
         };
+
         this.handleRender = () => {
             props.animateAction({
                 staticR: props.staticR,
@@ -39,6 +40,8 @@ export class MainForm extends React.Component<MainFormProps, MainFormState> {
                 rotatingMidR: props.rotatingMidR, canvasWidth: 1024
             });
         };
+
+        this.handleAnimate();
     }
 
     handleChange(event: React.ChangeEvent<HTMLInputElement>) {
