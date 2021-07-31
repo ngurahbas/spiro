@@ -13,7 +13,8 @@ ReactDOM.render(
 function animate(staticCircleRadius?: number, innerCircleRadius?: number, innerCircleMidToPen?: number) {
     ReactDOM.render(
         <SpiroCanvas staticR={staticCircleRadius} 
-            rotatingR={innerCircleRadius} rotatingMidR={innerCircleMidToPen}/>,
+            rotatingR={innerCircleRadius} rotatingMidR={innerCircleMidToPen}
+            canvasWidth={1024}/>,
         document.getElementById("canvas-wrapper")
     );
 }
@@ -21,7 +22,8 @@ function animate(staticCircleRadius?: number, innerCircleRadius?: number, innerC
 function render(staticCircleRadius?: number, innerCircleRadius?: number, innerCircleMidToPen?: number) {
     ReactDOM.render(
         <SpiroCanvas staticR={staticCircleRadius} 
-            rotatingR={innerCircleRadius} rotatingMidR={innerCircleMidToPen}/>,
+            rotatingR={innerCircleRadius} rotatingMidR={innerCircleMidToPen}
+            canvasWidth={1024}/>,
         document.getElementById("canvas-wrapper")
     );
 }

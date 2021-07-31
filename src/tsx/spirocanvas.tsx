@@ -1,29 +1,22 @@
 import * as React from "react";
 
-interface SpiroCanvasProps extends SpiroCanvasState { }
-
-interface SpiroCanvasState {
+interface SpiroCanvasProps {
     staticR: number;
     rotatingR: number;
     rotatingMidR: number;
+    canvasWidth: number;
 }
 
-export class SpiroCanvas extends React.Component<SpiroCanvasProps, SpiroCanvasState> {
+export class SpiroCanvas extends React.Component<SpiroCanvasProps> {
     canvas: React.Ref<HTMLCanvasElement>;
     
     constructor(props: SpiroCanvasProps) {
         super(props);
-        this.state = {
-            staticR: props.staticR,
-            rotatingR: props.rotatingR,
-            rotatingMidR: props.rotatingMidR,
-        }
     }
 
     render() {
-        let element = <canvas width="2048" height="2048" ref={this.canvas}></canvas>;
         return (
-            element
+            <canvas width={this.props.canvasWidth} height={this.props.canvasWidth} ref={this.canvas}></canvas>
         );
     }
 }
