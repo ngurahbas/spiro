@@ -1,29 +1,30 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import { Spiro } from "../ts/data";
 
 import { MainForm } from "./mainform";
 import { SpiroCanvas } from "./spirocanvas";
 
 ReactDOM.render(
-    <MainForm staticR={500} rotatingR={230} rotatingMidR={100}
-        animateAction={animate} renderAction={render}/>,
+    <MainForm staticR={500} rotatingR={250} rotatingMidR={100}
+        animateAction={animate} renderAction={render} />,
     document.getElementById("form-wrapper")
 );
 
-function animate(staticCircleRadius?: number, innerCircleRadius?: number, innerCircleMidToPen?: number) {
+function animate(spiro: Spiro) {
     ReactDOM.render(
-        <SpiroCanvas staticR={staticCircleRadius} 
-            rotatingR={innerCircleRadius} rotatingMidR={innerCircleMidToPen}
-            canvasWidth={1024}/>,
+        <SpiroCanvas staticR={spiro.staticR}
+            rotatingR={spiro.rotatingR} rotatingMidR={spiro.rotatingMidR}
+            canvasWidth={spiro.canvasWidth} />,
         document.getElementById("canvas-wrapper")
     );
 }
 
-function render(staticCircleRadius?: number, innerCircleRadius?: number, innerCircleMidToPen?: number) {
+function render(spiro: Spiro) {
     ReactDOM.render(
-        <SpiroCanvas staticR={staticCircleRadius} 
-            rotatingR={innerCircleRadius} rotatingMidR={innerCircleMidToPen}
-            canvasWidth={1024}/>,
+        <SpiroCanvas staticR={spiro.staticR}
+            rotatingR={spiro.rotatingR} rotatingMidR={spiro.rotatingMidR}
+            canvasWidth={spiro.canvasWidth} />,
         document.getElementById("canvas-wrapper")
     );
 }

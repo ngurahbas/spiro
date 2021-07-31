@@ -1,8 +1,9 @@
 import * as React from "react";
+import { Spiro } from "../ts/data";
 
 export interface MainFormProps extends MainFormState {
-    animateAction?: { (staticR?: number, rotatingR?: number, rotatingMidR?: number): void };
-    renderAction?: { (staticR?: number, rotatingR?: number, rotatingMidR?: number): void };
+    animateAction?: { (spiro: Spiro): void };
+    renderAction?: { (spiro: Spiro): void };
 }
 
 interface MainFormState {
@@ -23,10 +24,21 @@ export class MainForm extends React.Component<MainFormProps, MainFormState> {
             rotatingMidR: props.rotatingMidR,
         };
         this.handleChange = this.handleChange.bind(this);
-        this.handleAnimate = props.animateAction;
-        this.handleRender = props.renderAction;
 
-        this.handleAnimate();
+        this.handleAnimate = () => {
+            props.animateAction({
+                staticR: props.staticR,
+                rotatingR: props.rotatingR,
+                rotatingMidR: props.rotatingMidR, canvasWidth: 1024
+            });
+        };
+        this.handleRender = () => {
+            props.animateAction({
+                staticR: props.staticR,
+                rotatingR: props.rotatingR,
+                rotatingMidR: props.rotatingMidR, canvasWidth: 1024
+            });
+        };
     }
 
     handleChange(event: React.ChangeEvent<HTMLInputElement>) {
