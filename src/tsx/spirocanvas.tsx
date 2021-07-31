@@ -1,12 +1,8 @@
 import * as React from "react";
 import { CanvasController } from "../ts/canvas";
+import { Spiro } from "../ts/data";
 
-interface SpiroCanvasProps {
-    staticR: number;
-    rotatingR: number;
-    rotatingMidR: number;
-    canvasWidth: number;
-}
+interface SpiroCanvasProps extends Spiro { }
 
 export class SpiroCanvas extends React.Component<SpiroCanvasProps> {
     canvasRef: React.RefObject<HTMLCanvasElement>;
@@ -19,7 +15,7 @@ export class SpiroCanvas extends React.Component<SpiroCanvasProps> {
     }
 
     componentDidMount() {
-        this.canvasController = new CanvasController(this.canvasRef.current);
+        this.canvasController = new CanvasController(this.canvasRef.current, this.props);
     }
 
     render() {

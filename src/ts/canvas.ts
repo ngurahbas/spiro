@@ -1,4 +1,4 @@
-import { Circle, FillAndStroke, Point } from "./data";
+import { Circle, FillAndStroke, Point, Spiro } from "./data";
 
 export interface CanvasReference {
     width: number;
@@ -10,6 +10,7 @@ export class CanvasController implements CanvasReference {
     width: number;
     height: number;
     context: CanvasRenderingContext2D;
+    spiro: Spiro;
 
     get midX(): number {
         return this.width / 2;
@@ -19,10 +20,11 @@ export class CanvasController implements CanvasReference {
         return this.height / 2;
     }
 
-    constructor(element: HTMLCanvasElement) {
+    constructor(element: HTMLCanvasElement, spiro?: Spiro) {
         this.width = element.width;
         this.height = element.height;
         this.context = element.getContext("2d");
+        this.spiro = spiro;
     }
 
     drawPoint(point: Point, fillAndStroke?: FillAndStroke): void {
