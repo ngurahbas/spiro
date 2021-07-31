@@ -1,16 +1,11 @@
 import { Circle, FillAndStroke, Point, Spiro } from "./data";
 
-export interface CanvasReference {
-    width: number;
-    height: number;
-    context: RenderingContext;
-}
-
-export class CanvasController implements CanvasReference {
+export class CanvasController {
     width: number;
     height: number;
     context: CanvasRenderingContext2D;
     spiro: Spiro;
+    numOfRotation: number;
 
     get midX(): number {
         return this.width / 2;
