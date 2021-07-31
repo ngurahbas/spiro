@@ -1,4 +1,5 @@
 import { Circle, FillAndStroke, Point, Spiro } from "./data";
+import { gcd, lcm } from "./math";
 
 export class CanvasController {
     width: number;
@@ -20,6 +21,8 @@ export class CanvasController {
         this.height = element.height;
         this.context = element.getContext("2d");
         this.spiro = spiro;
+
+        this.numOfRotation = lcm(spiro.staticR, spiro.rotatingR) / gcd(spiro.staticR, spiro.rotatingR);
     }
 
     drawPoint(point: Point, fillAndStroke?: FillAndStroke): void {
