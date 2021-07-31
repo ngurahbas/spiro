@@ -12,6 +12,9 @@ interface MainFormState {
 }
 
 export class MainForm extends React.Component<MainFormProps, MainFormState> {
+    handleAnimate: { (): void };
+    handleRender: { (): void };
+
     constructor(props: MainFormProps) {
         super(props);
         this.state = {
@@ -20,12 +23,16 @@ export class MainForm extends React.Component<MainFormProps, MainFormState> {
             rotatingMidR: props.rotatingMidR,
         };
         this.handleChange = this.handleChange.bind(this);
+        this.handleAnimate = props.animateAction;
+        this.handleRender = props.renderAction;
+
+        this.handleAnimate();
     }
 
     handleChange(event: React.ChangeEvent<HTMLInputElement>) {
         let name = event.currentTarget.name;
         let type = event.currentTarget.type;
-        let value = type == "number" && event.currentTarget.value != "" 
+        let value = type == "number" && event.currentTarget.value != ""
             ? parseInt(event.currentTarget.value) : event.currentTarget.value;
         this.setState({ ...this.state, [name]: value });
     }
@@ -42,8 +49,8 @@ export class MainForm extends React.Component<MainFormProps, MainFormState> {
                 <div className="input-row">
                     <div className="input-label" />
                     <div className="input-value">
-                        <button className="action-button">animate</button>
-                        <button className="action-button">render</button>
+                        <button className="action-button" onClick={this.handleAnimate}>animate</button>
+                        <button className="action-button" onClick={this.handleRender}>render</button>
                     </div>
                 </div>
             </form>

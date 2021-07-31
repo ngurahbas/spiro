@@ -5,7 +5,8 @@ import { MainForm } from "./mainform";
 import { SpiroCanvas } from "./spirocanvas";
 
 ReactDOM.render(
-    <MainForm staticR={500} rotatingR={230} rotatingMidR={100}/>,
+    <MainForm staticR={500} rotatingR={230} rotatingMidR={100}
+        animateAction={animate}/>,
     document.getElementById("form-wrapper")
 );
 
@@ -16,5 +17,3 @@ function animate(staticCircleRadius?: number, innerCircleRadius?: number, innerC
         document.getElementById("canvas-wrapper")
     );
 }
-
-animate(500, 230, 100);

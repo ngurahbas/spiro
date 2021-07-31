@@ -16,7 +16,7 @@ body {
 }
 
 .main-wrapper {
-    @apply container mx-auto mt-2 grid grid-cols-2 shadow-md main-wrapper-color;
+    @apply container mx-auto xl:mt-2 grid grid-cols-2 shadow-md main-wrapper-color;
 }
 
 header {
@@ -24,7 +24,7 @@ header {
 }
 
 .dynamic-grid {
-    @apply col-span-2 xl:col-span-1 m-1;
+    @apply col-span-2 xl:col-span-1 mt-0.5 xl:m-1;
 }
 
 .dynamic-grid canvas {
