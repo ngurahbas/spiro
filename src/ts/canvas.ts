@@ -46,6 +46,7 @@ export class CanvasController {
             let elapsed = Math.round(timeStamp - startTime);
             if (inRev >= this.numOfRotation) {
                 inRev = 0;
+                complete = true;
             }
             inRev += speed * timing;
 
