@@ -78,7 +78,6 @@ export class CanvasController {
 
 //encapsulate
 function drawPoint(context: CanvasRenderingContext2D, point: Point, fillAndStroke?: FillAndStroke): void {
-    console.log("point", point);
     let oldFillStyle = context.fillStyle;
     let oldStrokeStyle = context.strokeStyle;
 
