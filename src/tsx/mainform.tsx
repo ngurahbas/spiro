@@ -24,6 +24,7 @@ export class MainForm extends React.Component<MainFormProps, MainFormState> {
             rotatingMidR: props.rotatingMidR,
         };
         this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
 
         this.handleAnimate = () => {
             props.animateAction({
@@ -40,8 +41,6 @@ export class MainForm extends React.Component<MainFormProps, MainFormState> {
                 rotatingMidR: props.rotatingMidR, canvasWidth: 1024
             });
         };
-
-        this.handleAnimate();
     }
 
     handleChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -52,9 +51,13 @@ export class MainForm extends React.Component<MainFormProps, MainFormState> {
         this.setState({ ...this.state, [name]: value });
     }
 
+    handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault();
+    }
+
     render() {
         return (
-            <form action="">
+            <form onSubmit={this.handleSubmit}>
                 <NumberEntry name="staticR" label="Static circle radius"
                     value={this.state.staticR} onChange={this.handleChange} />
                 <NumberEntry name="rotatingR" label="Inner circle radius"
