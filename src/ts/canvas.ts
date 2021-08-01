@@ -32,19 +32,28 @@ export class CanvasController {
         let animateInteval;
         let timing = 20;
         let speed = 0.001;
-        
+
         let revTiming = speed * timing;
         let startTime: DOMHighResTimeStamp;
+        let inRev = 0;
+        let complete = false;
         let animate = (timeStamp: DOMHighResTimeStamp) => {
             clear(this.context, this.width, this.height);
             if (!startTime) {
                 startTime = timeStamp;
             }
-            let elapsed = timeStamp - startTime;
-            
+            //revolution calculation
+            let elapsed = Math.round(timeStamp - startTime);
+            if (inRev >= this.numOfRotation) {
+                inRev = 0;
+            }
+            inRev += speed * timing;
+
             //static part;
-            drawCircle(this.context, {x: this.midX, y: this.midY, r: this.spiro.staticR},
-                {fillStyle: null, strokeStyle: "#000000"})
+            drawCircle(this.context,
+                { x: this.midX, y: this.midY, r: this.spiro.staticR },
+                { fillStyle: null, strokeStyle: "#000000" })
+            
         }
 
         animateInteval = setInterval(() => {
