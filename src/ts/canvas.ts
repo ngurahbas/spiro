@@ -67,7 +67,7 @@ export class CanvasController {
             //marker
             let markerX = rotatingMidX + this.spiro.rotatingMidR * sinByRev(inRev);
             let markerY = rotatingMidY - this.spiro.rotatingMidR * cosByRev(inRev);
-            drawPoint(this.context, {x: markerX, y: markerY});
+            drawPoint(this.context, {x: markerX, y: markerY, width: 5});
         }
 
         animateInteval = setInterval(() => {
@@ -87,7 +87,8 @@ function drawPoint(context: CanvasRenderingContext2D, point: Point, fillAndStrok
     }
 
     context.beginPath();
-    context.rect(point.x, point.y, 10, 10);
+    let width = point.width? point.width : 1;
+    context.rect(point.x, point.y, width, width);
     context.fill();
 
     context.fillStyle = oldFillStyle;
