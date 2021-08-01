@@ -1,5 +1,5 @@
 import { Circle, FillAndStroke, Point, Spiro } from "./data";
-import { gcd, lcm } from "./math";
+import { cosByRev, gcd, lcm, sinByRev } from "./math";
 
 export class CanvasController {
     width: number;
@@ -49,12 +49,25 @@ export class CanvasController {
                 complete = true;
             }
             inRev += speed * timing;
+            let outRev = inRev * (this.spiro.rotatingR / (this.spiro.staticR - this.spiro.rotatingR));
 
             //static part;
             drawCircle(this.context,
                 { x: this.midX, y: this.midY, r: this.spiro.staticR },
-                { fillStyle: null, strokeStyle: "#000000" })
-            
+                { fillStyle: null, strokeStyle: "#000000" });
+
+            //moving part;
+            //rotating circle
+            let deltaR = this.spiro.staticR - this.spiro.rotatingR;
+            let rotatingMidX = this.midX + deltaR * sinByRev(-outRev);
+            let rotatingMidY = this.midY - deltaR * cosByRev(-outRev);
+            drawCircle(this.context,
+                { x: rotatingMidX, y: rotatingMidY, r: this.spiro.rotatingR },
+                { fillStyle: null, strokeStyle: "#000000" });
+            //marker
+            let markerX = rotatingMidX + this.spiro.rotatingMidR * sinByRev(inRev);
+            let markerY = rotatingMidY - this.spiro.rotatingMidR * cosByRev(inRev);
+            drawPoint(this.context, {x: markerX, y: markerY});
         }
 
         animateInteval = setInterval(() => {
@@ -65,6 +78,7 @@ export class CanvasController {
 
 //encapsulate
 function drawPoint(context: CanvasRenderingContext2D, point: Point, fillAndStroke?: FillAndStroke): void {
+    console.log("point", point);
     let oldFillStyle = context.fillStyle;
     let oldStrokeStyle = context.strokeStyle;
 
@@ -74,7 +88,7 @@ function drawPoint(context: CanvasRenderingContext2D, point: Point, fillAndStrok
     }
 
     context.beginPath();
-    context.rect(point.x, point.y, 1, 1);
+    context.rect(point.x, point.y, 10, 10);
     context.fill();
 
     context.fillStyle = oldFillStyle;
