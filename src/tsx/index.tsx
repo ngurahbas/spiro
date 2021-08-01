@@ -12,19 +12,9 @@ ReactDOM.render(
 );
 
 function animate(spiro: Spiro) {
-    ReactDOM.render(
-        <SpiroCanvas staticR={spiro.staticR}
-            rotatingR={spiro.rotatingR} rotatingMidR={spiro.rotatingMidR}
-            canvasWidth={spiro.canvasWidth} />,
-        document.getElementById("canvas-wrapper")
-    );
+
 }
 
 function render(spiro: Spiro) {
-    ReactDOM.render(
-        <SpiroCanvas staticR={spiro.staticR}
-            rotatingR={spiro.rotatingR} rotatingMidR={spiro.rotatingMidR}
-            canvasWidth={spiro.canvasWidth} />,
-        document.getElementById("canvas-wrapper")
-    );
+
 }

@@ -28,17 +28,19 @@ export class MainForm extends React.Component<MainFormProps, MainFormState> {
 
         this.handleAnimate = () => {
             props.animateAction({
-                staticR: props.staticR,
-                rotatingR: props.rotatingR,
-                rotatingMidR: props.rotatingMidR, canvasWidth: 1024
+                staticR: this.state.staticR,
+                rotatingR: this.state.rotatingR,
+                rotatingMidR: this.state.rotatingMidR,
+                canvasWidth: 1024
             });
         };
 
         this.handleRender = () => {
             props.animateAction({
-                staticR: props.staticR,
-                rotatingR: props.rotatingR,
-                rotatingMidR: props.rotatingMidR, canvasWidth: 1024
+                staticR: this.state.staticR,
+                rotatingR: this.state.rotatingR,
+                rotatingMidR: this.state.rotatingMidR,
+                canvasWidth: 1024
             });
         };
     }
