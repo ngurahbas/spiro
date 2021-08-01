@@ -36,7 +36,6 @@ export class CanvasController {
         let revTiming = speed * timing;
         let startTime: DOMHighResTimeStamp;
         let inRev = 0;
-        let complete = false;
         let animate = (timeStamp: DOMHighResTimeStamp) => {
             clear(this.context, this.width, this.height);
             if (!startTime) {
@@ -46,9 +45,8 @@ export class CanvasController {
             let elapsed = Math.round(timeStamp - startTime);
             if (inRev >= this.numOfRotation) {
                 inRev = 0;
-                complete = true;
             }
-            inRev += speed * timing;
+            inRev += revTiming;
             let outRev = inRev * (this.spiro.rotatingR / (this.spiro.staticR - this.spiro.rotatingR));
 
             //static part;
