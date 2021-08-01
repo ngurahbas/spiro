@@ -7,6 +7,7 @@ export class CanvasController {
     context: CanvasRenderingContext2D;
     spiro: Spiro;
     numOfRotation: number;
+    points: { key: number, value: Point };// rev to Point map
 
     get midX(): number {
         return this.width / 2;
@@ -23,48 +24,63 @@ export class CanvasController {
         this.spiro = spiro;
 
         this.numOfRotation = lcm(spiro.staticR, spiro.rotatingR) / gcd(spiro.staticR, spiro.rotatingR);
+
+        this.startAnimation();
     }
 
-    drawPoint(point: Point, fillAndStroke?: FillAndStroke): void {
-        let oldFillStyle = this.context.fillStyle;
-        let oldStrokeStyle = this.context.strokeStyle;
-
-        if (fillAndStroke) {
-            this.context.fillStyle = fillAndStroke.fillStyle;
-            this.context.strokeStyle = fillAndStroke.strokeStyle;
+    startAnimation() {
+        let animateInteval;
+        function animate(timeStamp: DOMHighResTimeStamp) {
+            console.log("timeStamp: " + timeStamp);
         }
 
-        this.context.beginPath();
-        this.context.rect(point.x, point.y, 1, 1);
-        this.context.fill();
-
-        this.context.fillStyle = oldFillStyle;
-        this.context.strokeStyle = oldStrokeStyle;
+        animateInteval = setInterval(() => {
+            window.requestAnimationFrame(animate);
+        }, 20);
     }
 
-    drawCircle(circle: Circle, fillAndStroke?: FillAndStroke): void {
-        let oldFillStyle = this.context.fillStyle;
-        let oldStrokeStyle = this.context.strokeStyle;
+}
 
-        if (fillAndStroke) {
-            this.context.fillStyle = fillAndStroke.fillStyle;
-            this.context.strokeStyle = fillAndStroke.strokeStyle;
-        }
+//encapsulate
+function drawPoint(context: CanvasRenderingContext2D, point: Point, fillAndStroke?: FillAndStroke): void {
+    let oldFillStyle = context.fillStyle;
+    let oldStrokeStyle = context.strokeStyle;
 
-        this.context.beginPath();
-        this.context.arc(circle.x, circle.y, circle.r, 0, 2 * Math.PI);
-        this.context.fill();
-        this.context.stroke();
-
-        this.context.fillStyle = oldFillStyle;
-        this.context.strokeStyle = oldStrokeStyle;
+    if (fillAndStroke) {
+        context.fillStyle = fillAndStroke.fillStyle;
+        context.strokeStyle = fillAndStroke.strokeStyle;
     }
 
-    clear() {
-        this.context.clearRect(0, 0, this.width, this.height);
+    context.beginPath();
+    context.rect(point.x, point.y, 1, 1);
+    context.fill();
+
+    context.fillStyle = oldFillStyle;
+    context.strokeStyle = oldStrokeStyle;
+}
+
+function drawCircle(context: CanvasRenderingContext2D, circle: Circle, fillAndStroke?: FillAndStroke): void {
+    let oldFillStyle = context.fillStyle;
+    let oldStrokeStyle = context.strokeStyle;
+
+    if (fillAndStroke) {
+        context.fillStyle = fillAndStroke.fillStyle;
+        context.strokeStyle = fillAndStroke.strokeStyle;
     }
 
-    getPixel(x: number, y: number): Uint8ClampedArray {
-        return this.context.getImageData(x, y, 1, 1).data;
-    }
+    context.beginPath();
+    context.arc(circle.x, circle.y, circle.r, 0, 2 * Math.PI);
+    context.fill();
+    context.stroke();
+
+    context.fillStyle = oldFillStyle;
+    context.strokeStyle = oldStrokeStyle;
+}
+
+function clear(context: CanvasRenderingContext2D) {
+    context.clearRect(0, 0, this.width, this.height);
+}
+
+function getPixel(context: CanvasRenderingContext2D, x: number, y: number): Uint8ClampedArray {
+    return context.getImageData(x, y, 1, 1).data;
 }
