@@ -30,15 +30,27 @@ export class CanvasController {
 
     startAnimation() {
         let animateInteval;
-        function animate(timeStamp: DOMHighResTimeStamp) {
-            console.log("timeStamp: " + timeStamp);
+        let timing = 20;
+        let speed = 0.001;
+        
+        let revTiming = speed * timing;
+        let startTime: DOMHighResTimeStamp;
+        let animate = (timeStamp: DOMHighResTimeStamp) => {
+            clear(this.context, this.width, this.height);
+            if (!startTime) {
+                startTime = timeStamp;
+            }
+            let elapsed = timeStamp - startTime;
+            
+            //static part;
+            drawCircle(this.context, {x: this.midX, y: this.midY, r: this.spiro.staticR},
+                {fillStyle: null, strokeStyle: "#000000"})
         }
 
         animateInteval = setInterval(() => {
             window.requestAnimationFrame(animate);
-        }, 20);
+        }, timing);
     }
-
 }
 
 //encapsulate
@@ -70,15 +82,17 @@ function drawCircle(context: CanvasRenderingContext2D, circle: Circle, fillAndSt
 
     context.beginPath();
     context.arc(circle.x, circle.y, circle.r, 0, 2 * Math.PI);
-    context.fill();
+    if (fillAndStroke.fillStyle) {
+        context.fill();
+    }
     context.stroke();
 
     context.fillStyle = oldFillStyle;
     context.strokeStyle = oldStrokeStyle;
 }
 
-function clear(context: CanvasRenderingContext2D) {
-    context.clearRect(0, 0, this.width, this.height);
+function clear(context: CanvasRenderingContext2D, width: number, height: number) {
+    context.clearRect(0, 0, width, height);
 }
 
 function getPixel(context: CanvasRenderingContext2D, x: number, y: number): Uint8ClampedArray {
