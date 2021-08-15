@@ -1,28 +1,20 @@
 import * as React from "react";
 import { Spiro } from "../ts/data";
 
-export interface MainFormProps extends MainFormState {
+export interface MainFormProps extends Spiro {
     animateAction?: { (spiro: Spiro): void };
     renderAction?: { (spiro: Spiro): void };
 }
 
-interface MainFormState {
-    staticR?: number;
-    rotatingR?: number;
-    rotatingMidR?: number;
-}
-
-export class MainForm extends React.Component<MainFormProps, MainFormState> {
+export class MainForm extends React.Component<MainFormProps, Spiro> {
     handleAnimate: { (): void };
     handleRender: { (): void };
 
     constructor(props: MainFormProps) {
         super(props);
         this.state = {
-            staticR: props.staticR,
-            rotatingR: props.rotatingR,
-            rotatingMidR: props.rotatingMidR,
-        };
+            ...props,
+        }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
 
