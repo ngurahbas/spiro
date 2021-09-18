@@ -13,7 +13,7 @@ ReactDOM.render(
 );
 
 
-let spiroCanvas : RefObject<SpiroCanvas> = React.createRef();
+let spiroCanvas: RefObject<SpiroCanvas> = React.createRef();
 ReactDOM.render(<SpiroCanvas canvasWidth={500} ref={spiroCanvas}/>, document.getElementById("canvas-wrapper"));
 
 function animate(spiro: Spiro) {
