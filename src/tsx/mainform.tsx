@@ -28,7 +28,7 @@ export class MainForm extends React.Component<MainFormProps, Spiro> {
         };
 
         this.handleRender = () => {
-            props.animateAction({
+            props.renderAction({
                 staticR: this.state.staticR,
                 rotatingR: this.state.rotatingR,
                 rotatingMidR: this.state.rotatingMidR,

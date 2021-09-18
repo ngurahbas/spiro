@@ -1,4 +1,5 @@
 import * as React from "react";
+import { RefObject } from "react";
 import * as ReactDOM from "react-dom";
 import { Spiro } from "../ts/data";
 
@@ -11,10 +12,14 @@ ReactDOM.render(
     document.getElementById("form-wrapper")
 );
 
-function animate(spiro: Spiro) {
 
+let spiroCanvas : RefObject<SpiroCanvas> = React.createRef();
+ReactDOM.render(<SpiroCanvas canvasWidth={500} ref={spiroCanvas}/>, document.getElementById("canvas-wrapper"));
+
+function animate(spiro: Spiro) {
+    spiroCanvas.current.animateInCanvas(spiro);
 }
 
 function render(spiro: Spiro) {
-
+    spiroCanvas.current.renderInCanvas(spiro);
 }
