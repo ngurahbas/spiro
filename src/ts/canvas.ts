@@ -2,30 +2,30 @@ import { Circle, FillAndStroke, Point, Spiro } from "./data";
 import { cosByRev, gcd, lcm, sinByRev } from "./math";
 
 export class CanvasController {
-    width: number;
-    height: number;
+
     context: CanvasRenderingContext2D;
+
     spiro: Spiro;
+
     numOfRotation: number;
+
     points: { key: number, value: Point };// rev to Point map
 
     get midX(): number {
-        return this.width / 2;
+        return this.spiro.canvasWidth / 2;
     }
 
     get midY(): number {
-        return this.height / 2;
+        return this.spiro.canvasWidth / 2;
     }
 
     constructor(element: HTMLCanvasElement, spiro?: Spiro) {
-        this.width = element.width;
-        this.height = element.height;
         this.context = element.getContext("2d");
-        this.spiro = spiro;
 
-        this.numOfRotation = lcm(spiro.staticR, spiro.rotatingR) / gcd(spiro.staticR, spiro.rotatingR);
-
-        this.startAnimation();
+        if (spiro) {
+            this.spiro = spiro;
+            this.numOfRotation = lcm(spiro.staticR, spiro.rotatingR) / gcd(spiro.staticR, spiro.rotatingR);
+        }
     }
 
     startAnimation() {
@@ -37,7 +37,7 @@ export class CanvasController {
         let startTime: DOMHighResTimeStamp;
         let inRev = 0;
         let animate = (timeStamp: DOMHighResTimeStamp) => {
-            clear(this.context, this.width, this.height);
+            clear(this.context, this.spiro.canvasWidth, this.spiro.canvasWidth);
             if (!startTime) {
                 startTime = timeStamp;
             }
@@ -65,7 +65,7 @@ export class CanvasController {
             //marker
             let markerX = rotatingMidX + this.spiro.rotatingMidR * sinByRev(inRev);
             let markerY = rotatingMidY - this.spiro.rotatingMidR * cosByRev(inRev);
-            drawPoint(this.context, {x: markerX, y: markerY, width: 5});
+            drawPoint(this.context, { x: markerX, y: markerY, width: 5 });
         }
 
         animateInteval = setInterval(() => {
@@ -85,7 +85,7 @@ function drawPoint(context: CanvasRenderingContext2D, point: Point, fillAndStrok
     }
 
     context.beginPath();
-    let width = point.width? point.width : 1;
+    let width = point.width ? point.width : 1;
     context.rect(point.x, point.y, width, width);
     context.fill();
 
