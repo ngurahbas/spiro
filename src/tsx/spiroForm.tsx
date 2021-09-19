@@ -1,16 +1,16 @@
 import * as React from "react";
 import { Spiro } from "../ts/data";
 
-export interface MainFormProps extends Spiro {
+export interface SpiroFormProps extends Spiro {
     animateAction?: { (spiro: Spiro): void };
     renderAction?: { (spiro: Spiro): void };
 }
 
-export class MainForm extends React.Component<MainFormProps, Spiro> {
+export class SpiroForm extends React.Component<SpiroFormProps, Spiro> {
     handleAnimate: { (): void };
     handleRender: { (): void };
 
-    constructor(props: MainFormProps) {
+    constructor(props: SpiroFormProps) {
         super(props);
         this.state = {
             ...props,
