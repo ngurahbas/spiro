@@ -2,17 +2,18 @@ import * as React from "react";
 import { CanvasController } from "../ts/canvas";
 import { Spiro } from "../ts/data";
 
-interface SpiroCanvasProps {
+interface SpiroCanvasAttr {
     canvasWidth?: number;
 }
 
-export class SpiroCanvas extends React.Component<SpiroCanvasProps> {
+export class SpiroCanvas extends React.Component<SpiroCanvasAttr, SpiroCanvasAttr> {
     canvasRef: React.RefObject<HTMLCanvasElement> = React.createRef();
 
     canvasController: CanvasController;
 
-    constructor(props: SpiroCanvasProps) {
+    constructor(props: SpiroCanvasAttr) {
         super(props);
+        this.state = {...props};
     }
 
     componentDidMount() {
@@ -20,6 +21,7 @@ export class SpiroCanvas extends React.Component<SpiroCanvasProps> {
     }
 
     animateInCanvas(spiro: Spiro) {
+        this.setState({canvasWidth: spiro.canvasWidth});
         if (!this.canvasController)  {
             return;
         }
@@ -32,7 +34,7 @@ export class SpiroCanvas extends React.Component<SpiroCanvasProps> {
 
     render() {
         return (
-            <canvas width={this.props.canvasWidth} height={this.props.canvasWidth} ref={this.canvasRef}></canvas>
+            <canvas width={this.state.canvasWidth} height={this.state.canvasWidth} ref={this.canvasRef}></canvas>
         );
     }
 }

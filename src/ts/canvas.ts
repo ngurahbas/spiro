@@ -28,10 +28,13 @@ export class CanvasController {
         }
     }
 
+    animateInteval: ReturnType<typeof setInterval>;
+
     startAnimation(spiro: Spiro) {
+        this.animateInteval && clearInterval(this.animateInteval);
+
         this.spiro = spiro;
 
-        let animateInteval;
         let timing = 20;
         let speed = 0.001;
 
@@ -70,7 +73,7 @@ export class CanvasController {
             drawPoint(this.context, { x: markerX, y: markerY, width: 5 });
         }
 
-        animateInteval = setInterval(() => {
+        this.animateInteval = setInterval(() => {
             window.requestAnimationFrame(animate);
         }, timing);
     }
