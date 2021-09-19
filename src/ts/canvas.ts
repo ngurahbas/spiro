@@ -28,7 +28,9 @@ export class CanvasController {
         }
     }
 
-    startAnimation() {
+    startAnimation(spiro: Spiro) {
+        this.spiro = spiro;
+
         let animateInteval;
         let timing = 20;
         let speed = 0.001;

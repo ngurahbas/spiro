@@ -2,23 +2,28 @@ import * as React from "react";
 import { CanvasController } from "../ts/canvas";
 import { Spiro } from "../ts/data";
 
-interface SpiroCanvasProps{
+interface SpiroCanvasProps {
     canvasWidth?: number;
 }
 
 export class SpiroCanvas extends React.Component<SpiroCanvasProps> {
-    canvasRef: React.RefObject<HTMLCanvasElement>;
-    
+    canvasRef: React.RefObject<HTMLCanvasElement> = React.createRef();
+
     canvasController: CanvasController;
-    
+
     constructor(props: SpiroCanvasProps) {
         super(props);
-        this.canvasRef = React.createRef();
-        this.canvasRef.current
+    }
+
+    componentDidMount() {
+        this.canvasController = new CanvasController(this.canvasRef.current);
     }
 
     animateInCanvas(spiro: Spiro) {
-        console.log("animate in canvas", spiro);
+        if (!this.canvasController)  {
+            return;
+        }
+        this.canvasController.startAnimation(spiro);
     }
 
     renderInCanvas(spiro: Spiro) {
