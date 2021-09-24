@@ -35,7 +35,7 @@ export class CanvasController {
 
         this.spiro = spiro;
 
-        let timing = 20;
+        let timing = 5; //(1000ms/fps)
         let speed = 0.001;
 
         let revTiming = speed * timing;
@@ -46,8 +46,7 @@ export class CanvasController {
             if (!startTime) {
                 startTime = timeStamp;
             }
-            //revolution calculation
-            let elapsed = Math.round(timeStamp - startTime);
+
             if (inRev >= this.numOfRotation) {
                 inRev = 0;
             }
