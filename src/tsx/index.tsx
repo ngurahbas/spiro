@@ -4,7 +4,7 @@ import * as ReactDOM from "react-dom";
 import { Spiro } from "../ts/data";
 
 import { SpiroForm } from "./spiroForm";
-import { SpiroCanvas } from "./spirocanvas";
+import { SpiroCanvas } from "./spiroCanvas";
 
 ReactDOM.render(
     <SpiroForm staticR={500} rotatingR={250} rotatingMidR={100}
