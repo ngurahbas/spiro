@@ -10,8 +10,7 @@ let canvasElement = testDom.window.document.getElementById('canvas') as HTMLCanv
 
 describe('constructor of CanvasObjectController accept canvas element as input', () => {
     it('should create new valid object', () => {
-        let canvasController = new CanvasController(canvasElement,
-            { staticR: 500, rotatingR: 300, rotatingMidR: 250, canvasWidth: 1024 });
+        let canvasController = new CanvasController(canvasElement);
         assert.equal(canvasController.spiro.canvasWidth, 1024);
     });
 });

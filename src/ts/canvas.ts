@@ -9,7 +9,10 @@ export class CanvasController {
 
     spiro: Spiro;
 
-    graph: { currentRev: number, points: { [key: number]: Point } };
+    graph: {
+        currentRev: number,
+        points: { rev: number, point: Point }[]
+    };
 
     numOfRotation: number;
 
@@ -23,17 +26,12 @@ export class CanvasController {
         return this.spiro.canvasWidth / 2;
     }
 
-    constructor(element: HTMLCanvasElement, spiro?: Spiro) {
+    constructor(element: HTMLCanvasElement) {
         this.context = element.getContext("2d");
-
-        if (spiro) {
-            this.spiro = spiro;
-            this.numOfRotation = lcm(spiro.staticR, spiro.rotatingR) / gcd(spiro.staticR, spiro.rotatingR);
-        }
     }
 
     startPopulate() {
-        this.graph = { currentRev: 0, points: {} };
+        this.graph = { currentRev: 0, points: [] };
 
         let calculateGraph = () => {
             console.log("calculateGraph");
@@ -46,12 +44,14 @@ export class CanvasController {
                     { x: this.midX, y: this.midY },
                     this.graph.currentRev
                 );
-                this.graph.points[this.graph.currentRev] = markerPos;
+                this.graph.points.push({ rev: this.graph.currentRev, point: markerPos });
                 this.graph.currentRev += this.STEP_SIZE;
+
+                numOfCalcPoints++;
             }
 
             if (this.graph.currentRev < this.numOfRotation) {
-                setImmediate(calculateGraph);
+                queueMicrotask(calculateGraph);
             } else {
                 console.log("calculateGraph ended");
             }
@@ -61,10 +61,11 @@ export class CanvasController {
     }
 
     startAnimation(spiro: Spiro) {
+        this.spiro = spiro;
+        this.numOfRotation = lcm(spiro.staticR, spiro.rotatingR) / gcd(spiro.staticR, spiro.rotatingR);
+
         this.startPopulate();
         this.animateInteval && clearInterval(this.animateInteval);
-
-        this.spiro = spiro;
 
         let timing = 5; //(1000ms/fps)
 
@@ -72,7 +73,6 @@ export class CanvasController {
         let startTime: DOMHighResTimeStamp;
         let inRev = 0;
         let animate = (timeStamp: DOMHighResTimeStamp) => {
-            console.log("animate");
             clear(this.context, this.spiro.canvasWidth, this.spiro.canvasWidth);
             if (!startTime) {
                 startTime = timeStamp;
@@ -100,6 +100,8 @@ export class CanvasController {
                 { fillStyle: null, strokeStyle: "#000000" });
             //marker
             drawPoint(this.context, markerPos);
+
+            drawGraph(this.context, this.graph.points, inRev);
         }
 
         this.animateInteval = setInterval(() => {
@@ -165,6 +167,36 @@ function drawCircle(context: CanvasRenderingContext2D, circle: Circle, fillAndSt
     context.fillStyle = oldFillStyle;
     context.strokeStyle = oldStrokeStyle;
 }
+
+function drawGraph(
+    context: CanvasRenderingContext2D,
+    points: { rev: number, point: Point }[],
+    currentRev: number,
+    fillAndStroke?: FillAndStroke): void {
+    let oldFillStyle = context.fillStyle;
+    let oldStrokeStyle = context.strokeStyle;
+
+    if (fillAndStroke) {
+        context.fillStyle = fillAndStroke.fillStyle;
+        context.strokeStyle = fillAndStroke.strokeStyle;
+    }
+
+
+    context.beginPath();
+    context.moveTo(points[0].point.x, points[0].point.y);
+    for (let idx = 1; idx < (points.length - 1); idx++) {
+        let point = points[idx];
+        if (point.rev > currentRev) {
+            break;
+        }
+        context.lineTo(point.point.x, point.point.y);
+    }
+    context.stroke();
+
+    context.fillStyle = oldFillStyle;
+    context.strokeStyle = oldStrokeStyle;
+}
+
 
 function clear(context: CanvasRenderingContext2D, width: number, height: number) {
     context.clearRect(0, 0, width, height);
