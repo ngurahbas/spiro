@@ -3,7 +3,7 @@ import { cosByRev, gcd, lcm, sinByRev } from "./math";
 
 export class CanvasController {
 
-    readonly STEP_SIZE = 0.0001;
+    readonly STEP_SIZE = 0.001;
 
     context: CanvasRenderingContext2D;
 
