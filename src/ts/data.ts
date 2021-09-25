@@ -1,7 +1,6 @@
 export interface Point {
     x: number;
     y: number;
-    width?: number;
 }
 
 export interface Circle {

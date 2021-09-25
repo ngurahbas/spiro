@@ -34,7 +34,7 @@ export class CanvasController {
 
     startPopulate() {
         this.graph = [];
-        
+
     }
 
     startAnimation(spiro: Spiro) {
@@ -57,7 +57,7 @@ export class CanvasController {
                 inRev = 0;
             }
             inRev += revTiming;
-            let outRev = inRev * (this.spiro.rotatingR / (this.spiro.staticR - this.spiro.rotatingR));
+            let { midPos, markerPos } = calculatePosition(spiro, {x: this.midX, y: this.midY}, inRev);
 
             //static part;
             drawCircle(this.context,
@@ -66,16 +66,11 @@ export class CanvasController {
 
             //moving part;
             //rotating circle
-            let deltaR = this.spiro.staticR - this.spiro.rotatingR;
-            let rotatingMidX = this.midX + deltaR * sinByRev(-outRev);
-            let rotatingMidY = this.midY - deltaR * cosByRev(-outRev);
             drawCircle(this.context,
-                { x: rotatingMidX, y: rotatingMidY, r: this.spiro.rotatingR },
+                { x: midPos.x, y: midPos.y, r: this.spiro.rotatingR },
                 { fillStyle: null, strokeStyle: "#000000" });
             //marker
-            let markerX = rotatingMidX + this.spiro.rotatingMidR * sinByRev(inRev);
-            let markerY = rotatingMidY - this.spiro.rotatingMidR * cosByRev(inRev);
-            drawPoint(this.context, { x: markerX, y: markerY, width: 5 });
+            drawPoint(this.context, markerPos);
         }
 
         this.animateInteval = setInterval(() => {
@@ -86,6 +81,22 @@ export class CanvasController {
     startRender(spiro: Spiro) {
         throw new Error("Method not implemented.");
     }
+}
+
+function calculatePosition(spiro: Spiro, mid: Point, inRev: number): { midPos: Point, markerPos: Point } {
+    let outRev = inRev * (spiro.rotatingR / (spiro.staticR - spiro.rotatingR));
+    let deltaR = spiro.staticR - spiro.rotatingR;
+
+    let midX = mid.x + deltaR * sinByRev(-outRev);
+    let midY = mid.y - deltaR * cosByRev(-outRev);
+
+    let markerX = midX + spiro.rotatingMidR * sinByRev(inRev);
+    let markerY = midY - spiro.rotatingMidR * cosByRev(inRev);
+
+    return {
+        midPos: { x: midX, y: midY },
+        markerPos: { x: markerX, y: markerY }
+    };
 }
 
 //encapsulate
@@ -99,8 +110,7 @@ function drawPoint(context: CanvasRenderingContext2D, point: Point, fillAndStrok
     }
 
     context.beginPath();
-    let width = point.width ? point.width : 1;
-    context.rect(point.x, point.y, width, width);
+    context.rect(point.x, point.y, 4, 4);
     context.fill();
 
     context.fillStyle = oldFillStyle;
