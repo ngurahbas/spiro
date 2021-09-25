@@ -67,7 +67,7 @@ export class CanvasController {
         this.numOfRotation = lcm(spiro.staticR, spiro.rotatingR) / gcd(spiro.staticR, spiro.rotatingR);
 
         this.startPopulate();
-        this.animateInteval && clearInterval(this.animateInteval);
+        // this.animateInteval && clearInterval(this.animateInteval);
 
         let timing = 5; //(1000ms/fps)
 
@@ -80,7 +80,8 @@ export class CanvasController {
                 startTime = timeStamp;
             }
     
-            inRev += revTiming;
+            let roundEltime = Math.round(timeStamp - startTime);
+            inRev = this.STEP_SIZE * roundEltime;
             let { midPos, markerPos } = calculatePosition(
                 spiro,
                 { x: this.midX, y: this.midY },
@@ -101,11 +102,14 @@ export class CanvasController {
             drawPoint(this.context, markerPos);
 
             drawGraph(this.context, this.graph.points, inRev);
+            window.requestAnimationFrame(animate);
         }
 
-        this.animateInteval = setInterval(() => {
-            window.requestAnimationFrame(animate);
-        }, timing);
+        window.requestAnimationFrame(animate);
+
+        // this.animateInteval = setInterval(() => {
+        //     window.requestAnimationFrame(animate);
+        // }, timing);
     }
 
     startRender(spiro: Spiro) {
