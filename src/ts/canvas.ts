@@ -34,8 +34,8 @@ export class CanvasController {
         console.log("startPopulate");
         this.graph = { currentRev: 0, points: [] };
 
+        let calculateGraphInterval: ReturnType<typeof setInterval>;
         let calculateGraph = () => {
-            console.log("calculateGraph");
             let limit = 1000;
             let numOfCalcPoints = 0;
 
@@ -51,14 +51,15 @@ export class CanvasController {
                 numOfCalcPoints++;
             }
 
-            if (this.graph.currentRev < this.numOfRotation) {
-                queueMicrotask(calculateGraph);
-            } else {
-                console.log("calculateGraph ended");
+            if (this.graph.currentRev >= this.numOfRotation)  {
+                console.log("startPopulate ended ", this.graph.currentRev, this.numOfRotation);
+                clearInterval(calculateGraphInterval)
             }
         };
 
+        clearInterval(calculateGraphInterval);
         calculateGraph();
+        calculateGraphInterval = setInterval(calculateGraph, 1);
     }
 
     startAnimation(spiro: Spiro) {
