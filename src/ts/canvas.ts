@@ -31,6 +31,7 @@ export class CanvasController {
     }
 
     startPopulate() {
+        console.log("startPopulate");
         this.graph = { currentRev: 0, points: [] };
 
         let calculateGraph = () => {
@@ -77,10 +78,7 @@ export class CanvasController {
             if (!startTime) {
                 startTime = timeStamp;
             }
-
-            if (inRev >= this.numOfRotation) {
-                inRev = 0;
-            }
+    
             inRev += revTiming;
             let { midPos, markerPos } = calculatePosition(
                 spiro,
@@ -186,9 +184,6 @@ function drawGraph(
     context.moveTo(points[0].point.x, points[0].point.y);
     for (let idx = 1; idx < (points.length - 1); idx++) {
         let point = points[idx];
-        if (point.rev > currentRev) {
-            break;
-        }
         context.lineTo(point.point.x, point.point.y);
     }
     context.stroke();
