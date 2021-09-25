@@ -9,7 +9,7 @@ export class CanvasController {
 
     spiro: Spiro;
 
-    graph: Point[];
+    graph: { currentRev: number, points: { [key: number]: Point } };
 
     numOfRotation: number;
 
@@ -33,11 +33,35 @@ export class CanvasController {
     }
 
     startPopulate() {
-        this.graph = [];
+        this.graph = { currentRev: 0, points: {} };
 
+        let calculateGraph = () => {
+            console.log("calculateGraph");
+            let limit = 1000;
+            let numOfCalcPoints = 0;
+
+            while (numOfCalcPoints <= limit && this.graph.currentRev < this.numOfRotation) {
+                let { markerPos } = calculatePosition(
+                    this.spiro,
+                    { x: this.midX, y: this.midY },
+                    this.graph.currentRev
+                );
+                this.graph.points[this.graph.currentRev] = markerPos;
+                this.graph.currentRev += this.STEP_SIZE;
+            }
+
+            if (this.graph.currentRev < this.numOfRotation) {
+                setImmediate(calculateGraph);
+            } else {
+                console.log("calculateGraph ended");
+            }
+        };
+
+        calculateGraph();
     }
 
     startAnimation(spiro: Spiro) {
+        this.startPopulate();
         this.animateInteval && clearInterval(this.animateInteval);
 
         this.spiro = spiro;
@@ -48,6 +72,7 @@ export class CanvasController {
         let startTime: DOMHighResTimeStamp;
         let inRev = 0;
         let animate = (timeStamp: DOMHighResTimeStamp) => {
+            console.log("animate");
             clear(this.context, this.spiro.canvasWidth, this.spiro.canvasWidth);
             if (!startTime) {
                 startTime = timeStamp;
@@ -57,7 +82,11 @@ export class CanvasController {
                 inRev = 0;
             }
             inRev += revTiming;
-            let { midPos, markerPos } = calculatePosition(spiro, {x: this.midX, y: this.midY}, inRev);
+            let { midPos, markerPos } = calculatePosition(
+                spiro,
+                { x: this.midX, y: this.midY },
+                inRev
+            );
 
             //static part;
             drawCircle(this.context,
