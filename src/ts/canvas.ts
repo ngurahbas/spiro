@@ -3,13 +3,13 @@ import { cosByRev, gcd, lcm, sinByRev } from "./math";
 
 export class CanvasController {
 
+    readonly STEP_SIZE = 0.0001;
+
     context: CanvasRenderingContext2D;
 
     spiro: Spiro;
 
     numOfRotation: number;
-
-    points: { key: number, value: Point };// rev to Point map
 
     get midX(): number {
         return this.spiro.canvasWidth / 2;
@@ -36,9 +36,8 @@ export class CanvasController {
         this.spiro = spiro;
 
         let timing = 5; //(1000ms/fps)
-        let speed = 0.001;
 
-        let revTiming = speed * timing;
+        let revTiming = this.STEP_SIZE * timing;
         let startTime: DOMHighResTimeStamp;
         let inRev = 0;
         let animate = (timeStamp: DOMHighResTimeStamp) => {
@@ -75,6 +74,10 @@ export class CanvasController {
         this.animateInteval = setInterval(() => {
             window.requestAnimationFrame(animate);
         }, timing);
+    }
+
+    startRender(spiro: Spiro) {
+        throw new Error("Method not implemented.");
     }
 }
 

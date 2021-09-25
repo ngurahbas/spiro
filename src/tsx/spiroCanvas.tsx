@@ -29,7 +29,11 @@ export class SpiroCanvas extends React.Component<SpiroCanvasAttr, SpiroCanvasAtt
     }
 
     renderInCanvas(spiro: Spiro) {
-        console.log("render in canvas", spiro);
+        this.setState({canvasWidth: spiro.canvasWidth});
+        if (!this.canvasController)  {
+            return;
+        }
+        this.canvasController.startRender(spiro);
     }
 
     render() {
