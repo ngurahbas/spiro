@@ -9,7 +9,11 @@ export class CanvasController {
 
     spiro: Spiro;
 
+    graph: Point[];
+
     numOfRotation: number;
+
+    animateInteval: ReturnType<typeof setInterval>;
 
     get midX(): number {
         return this.spiro.canvasWidth / 2;
@@ -28,7 +32,10 @@ export class CanvasController {
         }
     }
 
-    animateInteval: ReturnType<typeof setInterval>;
+    startPopulate() {
+        this.graph = [];
+        
+    }
 
     startAnimation(spiro: Spiro) {
         this.animateInteval && clearInterval(this.animateInteval);
