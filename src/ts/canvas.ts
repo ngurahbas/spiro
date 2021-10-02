@@ -3,7 +3,8 @@ import { cosByRev, gcd, lcm, sinByRev } from "./math";
 
 export class CanvasController {
 
-    readonly STEP_SIZE = 0.001;
+    readonly STEP_SIZE = 0.02;
+    readonly SPEED = 0.001;
 
     context: CanvasRenderingContext2D;
 
@@ -69,9 +70,6 @@ export class CanvasController {
         this.startPopulate();
         // this.animateInteval && clearInterval(this.animateInteval);
 
-        let timing = 5; //(1000ms/fps)
-
-        let revTiming = this.STEP_SIZE * timing;
         let startTime: DOMHighResTimeStamp;
         let inRev = 0;
         let animate = (timeStamp: DOMHighResTimeStamp) => {
@@ -81,7 +79,7 @@ export class CanvasController {
             }
     
             let roundEltime = Math.round(timeStamp - startTime);
-            inRev = this.STEP_SIZE * roundEltime;
+            inRev = this.SPEED * roundEltime;
             let { midPos, markerPos } = calculatePosition(
                 spiro,
                 { x: this.midX, y: this.midY },
@@ -106,10 +104,6 @@ export class CanvasController {
         }
 
         window.requestAnimationFrame(animate);
-
-        // this.animateInteval = setInterval(() => {
-        //     window.requestAnimationFrame(animate);
-        // }, timing);
     }
 
     startRender(spiro: Spiro) {
