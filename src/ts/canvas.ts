@@ -3,7 +3,7 @@ import { cosByRev, gcd, lcm, sinByRev } from "./math";
 
 export class CanvasController {
 
-    readonly STEP_SIZE = 0.02;
+    readonly STEP_SIZE = 0.001;
     readonly SPEED = 0.001;
 
     context: CanvasRenderingContext2D;
@@ -68,10 +68,16 @@ export class CanvasController {
         this.numOfRotation = lcm(spiro.staticR, spiro.rotatingR) / gcd(spiro.staticR, spiro.rotatingR);
 
         this.startPopulate();
-        // this.animateInteval && clearInterval(this.animateInteval);
 
+        let preRenderCanvas = document.createElement("canvas");
+        preRenderCanvas.width = spiro.canvasWidth;
+        preRenderCanvas.height = spiro.canvasWidth;
+        let preRenderContext = preRenderCanvas.getContext("2d");
+        
         let startTime: DOMHighResTimeStamp;
         let inRev = 0;
+        let fromIndex = 0;
+        console.log("animation start");
         let animate = (timeStamp: DOMHighResTimeStamp) => {
             clear(this.context, this.spiro.canvasWidth, this.spiro.canvasWidth);
             if (!startTime) {
@@ -99,11 +105,14 @@ export class CanvasController {
             //marker
             drawPoint(this.context, markerPos);
 
-            drawGraph(this.context, this.graph.points, inRev);
+            let endIndex = drawGraphProgressive(preRenderContext, this.graph.points, fromIndex, inRev);
+            fromIndex = endIndex;
+            this.context.drawImage(preRenderCanvas, 0, 0);
+               
             window.requestAnimationFrame(animate);
         }
 
-        window.requestAnimationFrame(animate);
+        setTimeout(() => {window.requestAnimationFrame(animate)}, 100);
     }
 
     startRender(spiro: Spiro) {
@@ -165,11 +174,12 @@ function drawCircle(context: CanvasRenderingContext2D, circle: Circle, fillAndSt
     context.strokeStyle = oldStrokeStyle;
 }
 
-function drawGraph(
+function drawGraphProgressive(
     context: CanvasRenderingContext2D,
     points: { rev: number, point: Point }[],
-    currentRev: number,
-    fillAndStroke?: FillAndStroke): void {
+    fromIndex: number,
+    toRev: number,
+    fillAndStroke?: FillAndStroke): number {
     let oldFillStyle = context.fillStyle;
     let oldStrokeStyle = context.strokeStyle;
 
@@ -180,15 +190,22 @@ function drawGraph(
 
 
     context.beginPath();
-    context.moveTo(points[0].point.x, points[0].point.y);
-    for (let idx = 1; idx < (points.length - 1); idx++) {
+    context.moveTo(points[fromIndex].point.x, points[fromIndex].point.y);
+    let endIndex = 0;
+    for (let idx = fromIndex; idx < points.length; idx++) {
         let point = points[idx];
         context.lineTo(point.point.x, point.point.y);
+        endIndex = idx;
+        if (point.rev >= toRev) {
+            break;
+        }
     }
     context.stroke();
 
     context.fillStyle = oldFillStyle;
     context.strokeStyle = oldStrokeStyle;
+
+    return endIndex;
 }
 
 
