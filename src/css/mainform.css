@@ -14,7 +14,7 @@ form {
     @apply w-1/2;
 }
 
-.input-value input {
+.input-value select {
     @apply w-40 border-2 border-gray-700;
 }
 

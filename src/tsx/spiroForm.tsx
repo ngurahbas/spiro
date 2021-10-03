@@ -103,12 +103,14 @@ function NumberEntry(props: NumberEntryProps) {
             <div className="input-label">
                 <label htmlFor={props.name}>{props.label}</label>
             </div>
-            <select className="input-value" name={props.name} value={props.value} onChange={props.onChange}>
-                {
-                    props.range.map((value, index) =>
-                        <option key={value} value={value} label={value.toString()} />)
-                }
-            </select>
+            <div className="input-value">
+                <select name={props.name} value={props.value} onChange={props.onChange}>
+                    {
+                        props.range.map((value, index) =>
+                            <option key={value} value={value} label={value.toString()} />)
+                    }
+                </select>
+            </div>
         </div>
     );
 }
