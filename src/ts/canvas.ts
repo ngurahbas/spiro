@@ -197,10 +197,10 @@ function drawGraphProgressive(
     context.moveTo(points[fromIndex].point.x, points[fromIndex].point.y);
     let endIndex = 0;
     for (let idx = fromIndex; idx < points.length; idx++) {
-        let point = points[idx];
-        context.lineTo(point.point.x, point.point.y);
+        let currPoint = points[idx];
+        context.lineTo(currPoint.point.x, currPoint.point.y);
         endIndex = idx;
-        if (point.rev >= toRev) {
+        if (currPoint.rev >= toRev) {
             break;
         }
     }
