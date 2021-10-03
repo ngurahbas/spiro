@@ -3,8 +3,8 @@ import { cosByRev, gcd, lcm, sinByRev } from "./math";
 
 export class CanvasController {
 
-    readonly STEP_SIZE = 0.001;
-    readonly SPEED = 0.0005;
+    readonly STEP_SIZE = 0.0001;
+    readonly SPEED = 0.0004;
 
     context: CanvasRenderingContext2D;
 
@@ -195,14 +195,21 @@ function drawGraphProgressive(
 
     context.beginPath();
     context.moveTo(points[fromIndex].point.x, points[fromIndex].point.y);
-    let endIndex = 0;
+    let endIndex = fromIndex;
+    let lastDraw = false;
     for (let idx = fromIndex; idx < points.length; idx++) {
         let currPoint = points[idx];
-        context.lineTo(currPoint.point.x, currPoint.point.y);
-        endIndex = idx;
-        if (currPoint.rev >= toRev) {
+        if (currPoint.rev > toRev) {
             break;
         }
+        if (idx == (points.length - 1)) {
+            lastDraw = true;
+        }
+        context.lineTo(currPoint.point.x, currPoint.point.y);
+        endIndex = idx;
+    }
+    if (lastDraw) {
+        // context.lineTo(points[0].point.x, points[0].point.y);
     }
     context.stroke();
 
