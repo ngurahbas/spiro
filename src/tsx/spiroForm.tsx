@@ -37,7 +37,7 @@ export class SpiroForm extends React.Component<SpiroFormProps, Spiro> {
         };
     }
 
-    handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+    handleChange(event: React.ChangeEvent<HTMLSelectElement>) {
         let name = event.currentTarget.name;
         let type = event.currentTarget.type;
         let value = type == "number" && event.currentTarget.value != ""
@@ -74,7 +74,7 @@ interface NumberEntryProps {
     name: string;
     label: string;
     value: number;
-    onChange: { (event: React.FormEvent<HTMLInputElement>): void; };
+    onChange: { (event: React.FormEvent<HTMLSelectElement>): void; };
 }
 
 function NumberEntry(props: NumberEntryProps) {
@@ -83,9 +83,17 @@ function NumberEntry(props: NumberEntryProps) {
             <div className="input-label">
                 <label htmlFor={props.name}>{props.label}</label>
             </div>
-            <div className="input-value">
-                <input name={props.name} type="number" value={props.value} onChange={props.onChange} step={10} />
-            </div>
+            <select className="input-value" name={props.name} value={props.value} onChange={props.onChange}>
+                {
+                    arrRange(100, 500, 10).map((value, index) =>
+                        <option key={value} value={value} label={value.toString()} />)
+                }
+            </select>
         </div>
     );
+}
+
+function arrRange(min: number, max: number, interval: number): number[] {
+    let length = Math.floor((max - min) / interval) + 1;
+    return Array(length).fill(min).map((value, idx) => value + idx * interval);
 }
