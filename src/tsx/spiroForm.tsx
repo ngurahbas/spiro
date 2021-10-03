@@ -38,11 +38,27 @@ export class SpiroForm extends React.Component<SpiroFormProps, Spiro> {
     }
 
     handleChange(event: React.ChangeEvent<HTMLSelectElement>) {
+        let changeData: {[key: string]: any}  = {
+            canvasWidth: this.state.canvasWidth,
+            staticR: this.state.staticR,
+            rotatingR: this.state.rotatingR,
+            rotatingMidR: this.state.rotatingMidR,
+        };
+
         let name = event.currentTarget.name;
-        let type = event.currentTarget.type;
+        let type = typeof(event.currentTarget.value);
         let value = type == "number" && event.currentTarget.value != ""
-            ? parseInt(event.currentTarget.value) : event.currentTarget.value;
-        this.setState({ ...this.state, [name]: value });
+            ? event.currentTarget.value : parseInt(event.currentTarget.value);
+        changeData[name] = value;
+
+        if (changeData.rotatingR >= changeData.staticR) {
+            changeData.rotatingR = changeData.staticR - 10;
+        }
+        if (changeData.rotatingMidR >= changeData.rotatingR) {
+            changeData.rotatingMidR = changeData.rotatingR - 10;
+        }
+
+        this.setState({...this.state, ...changeData});
     }
 
     handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -53,11 +69,14 @@ export class SpiroForm extends React.Component<SpiroFormProps, Spiro> {
         return (
             <form onSubmit={this.handleSubmit}>
                 <NumberEntry name="staticR" label="Static circle radius"
-                    value={this.state.staticR} onChange={this.handleChange} />
+                    value={this.state.staticR} onChange={this.handleChange}
+                    range={arrRange(100, 500, 10)} />
                 <NumberEntry name="rotatingR" label="Inner circle radius"
-                    value={this.state.rotatingR} onChange={this.handleChange} />
+                    value={this.state.rotatingR} onChange={this.handleChange}
+                    range={arrRange(50, this.state.staticR - 10, 10)} />
                 <NumberEntry name="rotatingMidR" label="Pen distance"
-                    value={this.state.rotatingMidR} onChange={this.handleChange} />
+                    value={this.state.rotatingMidR} onChange={this.handleChange}
+                    range={arrRange(10, this.state.rotatingR - 10, 10)} />
                 <div className="input-row">
                     <div className="input-label" />
                     <div className="input-value">
@@ -74,6 +93,7 @@ interface NumberEntryProps {
     name: string;
     label: string;
     value: number;
+    range: number[];
     onChange: { (event: React.FormEvent<HTMLSelectElement>): void; };
 }
 
@@ -85,7 +105,7 @@ function NumberEntry(props: NumberEntryProps) {
             </div>
             <select className="input-value" name={props.name} value={props.value} onChange={props.onChange}>
                 {
-                    arrRange(100, 500, 10).map((value, index) =>
+                    props.range.map((value, index) =>
                         <option key={value} value={value} label={value.toString()} />)
                 }
             </select>
