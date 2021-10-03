@@ -17,8 +17,6 @@ export class CanvasController {
 
     numOfRotation: number;
 
-    animateInteval: ReturnType<typeof setInterval>;
-
     get midX(): number {
         return this.spiro.canvasWidth / 2;
     }
@@ -63,7 +61,14 @@ export class CanvasController {
         calculateGraphInterval = setInterval(calculateGraph, 1);
     }
 
+
+    startTime: DOMHighResTimeStamp = 0;
+    fromIndex = 0;
+    inRev = 0;
+    animationInt: ReturnType<typeof setInterval>;
     startAnimation(spiro: Spiro) {
+        console.log("animationInt", this.animationInt);
+        clearInterval(this.animationInt);
         this.spiro = spiro;
         this.numOfRotation = lcm(spiro.staticR, spiro.rotatingR) / gcd(spiro.staticR, spiro.rotatingR);
 
@@ -73,23 +78,23 @@ export class CanvasController {
         preRenderCanvas.width = spiro.canvasWidth;
         preRenderCanvas.height = spiro.canvasWidth;
         let preRenderContext = preRenderCanvas.getContext("2d");
+        this.startTime = 0;
+        this.fromIndex = 0;
+        this.inRev = 0;
         
-        let startTime: DOMHighResTimeStamp;
-        let inRev = 0;
-        let fromIndex = 0;
         console.log("animation start");
         let animate = (timeStamp: DOMHighResTimeStamp) => {
             clear(this.context, this.spiro.canvasWidth, this.spiro.canvasWidth);
-            if (!startTime) {
-                startTime = timeStamp;
+            if (!this.startTime) {
+                this.startTime = timeStamp;
             }
     
-            let roundEltime = Math.round(timeStamp - startTime);
-            inRev = this.SPEED * roundEltime;
+            let roundEltime = Math.round(timeStamp - this.startTime);
+            this.inRev = this.SPEED * roundEltime;
             let { midPos, markerPos } = calculatePosition(
                 spiro,
                 { x: this.midX, y: this.midY },
-                inRev
+                this.inRev
             );
 
             //static part;
@@ -105,14 +110,12 @@ export class CanvasController {
             //marker
             drawPoint(this.context, markerPos);
 
-            let endIndex = drawGraphProgressive(preRenderContext, this.graph.points, fromIndex, inRev);
-            fromIndex = endIndex;
+            let endIndex = drawGraphProgressive(preRenderContext, this.graph.points, this.fromIndex, this.inRev);
+            this.fromIndex = endIndex;
             this.context.drawImage(preRenderCanvas, 0, 0);
-               
-            window.requestAnimationFrame(animate);
         }
 
-        setTimeout(() => {window.requestAnimationFrame(animate)}, 100);
+        this.animationInt = setInterval(() => {requestAnimationFrame(animate);}, 5);
     }
 
     startRender(spiro: Spiro) {
