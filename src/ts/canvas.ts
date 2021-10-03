@@ -4,7 +4,7 @@ import { cosByRev, gcd, lcm, sinByRev } from "./math";
 export class CanvasController {
 
     readonly STEP_SIZE = 0.001;
-    readonly SPEED = 0.001;
+    readonly SPEED = 0.0005;
 
     context: CanvasRenderingContext2D;
 
@@ -70,7 +70,8 @@ export class CanvasController {
         console.log("animationInt", this.animationInt);
         clearInterval(this.animationInt);
         this.spiro = spiro;
-        this.numOfRotation = lcm(spiro.staticR, spiro.rotatingR) / gcd(spiro.staticR, spiro.rotatingR);
+        let lcmValue = lcm(spiro.rotatingR, (spiro.staticR - spiro.rotatingR));
+        this.numOfRotation = lcmValue / spiro.rotatingR;
 
         this.startPopulate();
 
