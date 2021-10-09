@@ -70,13 +70,13 @@ export class SpiroForm extends React.Component<SpiroFormProps, Spiro> {
             <form onSubmit={this.handleSubmit}>
                 <NumberEntry name="staticR" label="Static circle radius"
                     value={this.state.staticR} onChange={this.handleChange}
-                    range={arrRange(100, 500, 10)} />
+                    range={arrRange(100, 500, 1)} />
                 <NumberEntry name="rotatingR" label="Inner circle radius"
                     value={this.state.rotatingR} onChange={this.handleChange}
-                    range={arrRange(50, this.state.staticR - 10, 10)} />
+                    range={arrRange(50, this.state.staticR - 10, 1)} />
                 <NumberEntry name="rotatingMidR" label="Pen distance"
                     value={this.state.rotatingMidR} onChange={this.handleChange}
-                    range={arrRange(10, this.state.rotatingR - 10, 10)} />
+                    range={arrRange(10, this.state.rotatingR - 10, 1)} />
                 <div className="input-row">
                     <div className="input-label" />
                     <div className="input-value">
