@@ -5,7 +5,7 @@ module.exports = {
     entry: {
         index: { 
             import: './src/tsx/index.tsx',
-            dependOn: ['react', 'style'],
+            dependOn: 'react',
         },
         react: 'react',
         style: './src/css/index.css',
