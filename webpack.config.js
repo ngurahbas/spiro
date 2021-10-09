@@ -3,7 +3,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: {
-        index: ['./src/tsx/index.tsx', './src/css/index.css'],
+        index: { 
+            import: ['./src/tsx/index.tsx', './src/css/index.css'],
+            dependOn: 'react',
+        },
+        react: 'react',
     },
     module: {
         rules: [{
@@ -33,7 +37,7 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             template: './src/html/index.html',
-            chunks: ['index']
+            chunks: ['index', 'react']
         })
     ],
     devServer: {
