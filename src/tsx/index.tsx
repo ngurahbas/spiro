@@ -8,7 +8,7 @@ import { SpiroCanvas } from "./spiroCanvas";
 
 ReactDOM.render(
     <SpiroForm staticR={500} rotatingR={250} rotatingMidR={100}
-        canvasWidth={2048} animateAction={animate} renderAction={render} />,
+        canvasWidth={1024} animateAction={animate} renderAction={render} />,
     document.getElementById("form-wrapper")
 );
 

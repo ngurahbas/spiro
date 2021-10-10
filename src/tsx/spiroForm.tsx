@@ -23,7 +23,7 @@ export class SpiroForm extends React.Component<SpiroFormProps, Spiro> {
                 staticR: this.state.staticR,
                 rotatingR: this.state.rotatingR,
                 rotatingMidR: this.state.rotatingMidR,
-                canvasWidth: 1024
+                canvasWidth: this.state.canvasWidth,
             });
         };
 
@@ -32,7 +32,7 @@ export class SpiroForm extends React.Component<SpiroFormProps, Spiro> {
                 staticR: this.state.staticR,
                 rotatingR: this.state.rotatingR,
                 rotatingMidR: this.state.rotatingMidR,
-                canvasWidth: 1024
+                canvasWidth: this.state.canvasWidth,
             });
         };
     }
