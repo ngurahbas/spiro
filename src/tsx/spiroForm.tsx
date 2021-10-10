@@ -6,7 +6,10 @@ export interface SpiroFormProps extends Spiro {
     renderAction?: { (spiro: Spiro): void };
 }
 
-export class SpiroForm extends React.Component<SpiroFormProps, Spiro> {
+export interface SpiroFormState extends Spiro {
+}
+
+export class SpiroForm extends React.Component<SpiroFormProps, SpiroFormState> {
     handleAnimate: { (): void };
     handleRender: { (): void };
 
