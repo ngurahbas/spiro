@@ -29,7 +29,7 @@ export class CanvasController {
         this.context = element.getContext("2d");
     }
 
-    startPopulate() {
+    startPopulate(withLimit: boolean = true) {
         console.log("startPopulate");
         this.graph = { currentRev: 0, points: [] };
 
@@ -38,7 +38,7 @@ export class CanvasController {
             let limit = 1000;
             let numOfCalcPoints = 0;
 
-            while (numOfCalcPoints <= limit && this.graph.currentRev < this.numOfRotation) {
+            while ((!withLimit || numOfCalcPoints <= limit) && this.graph.currentRev < this.numOfRotation) {
                 let { markerPos } = calculatePosition(
                     this.spiro,
                     { x: this.midX, y: this.midY },
@@ -50,15 +50,18 @@ export class CanvasController {
                 numOfCalcPoints++;
             }
 
-            if (this.graph.currentRev >= this.numOfRotation)  {
+            if (this.graph.currentRev >= this.numOfRotation) {
                 console.log("startPopulate ended ", this.graph.currentRev, this.numOfRotation);
                 clearInterval(calculateGraphInterval)
             }
         };
 
         clearInterval(calculateGraphInterval);
-        calculateGraph();
-        calculateGraphInterval = setInterval(calculateGraph, 1);
+        if (!withLimit) {
+            calculateGraph();
+        } else {
+            calculateGraphInterval = setInterval(calculateGraph, 1);
+        }
     }
 
 
@@ -66,13 +69,19 @@ export class CanvasController {
     fromIndex = 0;
     inRev = 0;
     animationInt: ReturnType<typeof setInterval>;
-    startAnimation(spiro: Spiro) {
-        console.log("animationInt", this.animationInt);
-        clearInterval(this.animationInt);
+
+    private setSpiro(spiro: Spiro) {
         this.spiro = spiro;
         let lcmValue = lcm(spiro.rotatingR, (spiro.staticR - spiro.rotatingR));
         this.numOfRotation = lcmValue / spiro.rotatingR;
 
+        clearInterval(this.animationInt);
+        clear(this.context, this.spiro.canvasWidth, this.spiro.canvasWidth);
+    }
+
+    startAnimation(spiro: Spiro) {
+        this.setSpiro(spiro);
+        console.log("animationInt", this.animationInt);
         this.startPopulate();
 
         let preRenderCanvas = document.createElement("canvas");
@@ -82,14 +91,14 @@ export class CanvasController {
         this.startTime = 0;
         this.fromIndex = 0;
         this.inRev = 0;
-        
+
         console.log("animation start");
         let animate = (timeStamp: DOMHighResTimeStamp) => {
             clear(this.context, this.spiro.canvasWidth, this.spiro.canvasWidth);
             if (!this.startTime) {
                 this.startTime = timeStamp;
             }
-    
+
             let roundEltime = Math.round(timeStamp - this.startTime);
             this.inRev = this.SPEED * roundEltime;
             let { midPos, markerPos } = calculatePosition(
@@ -116,11 +125,16 @@ export class CanvasController {
             this.context.drawImage(preRenderCanvas, 0, 0);
         }
 
-        this.animationInt = setInterval(() => {requestAnimationFrame(animate);}, 5);
+        this.animationInt = setInterval(() => { requestAnimationFrame(animate); }, 5);
     }
 
     startRender(spiro: Spiro) {
-        throw new Error("Method not implemented.");
+        //TODO somehow if setTimeout is not used canvas is not rendered. I don't know why
+        setTimeout(() => {
+            this.setSpiro(spiro);
+            this.startPopulate(false);
+            drawGraphProgressive(this.context, this.graph.points, 0, this.numOfRotation);
+        },0);
     }
 }
 
@@ -184,6 +198,7 @@ function drawGraphProgressive(
     fromIndex: number,
     toRev: number,
     fillAndStroke?: FillAndStroke): number {
+
     let oldFillStyle = context.fillStyle;
     let oldStrokeStyle = context.strokeStyle;
 
