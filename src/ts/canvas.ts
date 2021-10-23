@@ -74,7 +74,6 @@ export class CanvasController {
         this.numOfRotation = lcmValue / spiro.rotatingR;
 
         clearInterval(this.animationInt);
-        clear(this.context, this.spiro.canvasWidth, this.spiro.canvasWidth);
     }
 
     startAnimation(spiro: Spiro) {
@@ -132,12 +131,12 @@ export class CanvasController {
     }
 
     startRender(spiro: Spiro) {
-        //TODO somehow if setTimeout is not used canvas is not rendered. I don't know why
+        this.setSpiro(spiro);
+        this.startPopulate(false);
         setTimeout(() => {
-            this.setSpiro(spiro);
-            this.startPopulate(false);
+            clear(this.context, this.spiro.canvasWidth, this.spiro.canvasWidth);
             drawGraphProgressive(this.context, this.graph.points, 0, this.numOfRotation);
-        },0);
+        }, 10);
     }
 }
 
