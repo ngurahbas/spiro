@@ -116,6 +116,13 @@ export class CanvasController {
             //marker
             drawPoint(this.context, markerPos);
 
+            let exLd = this.context.getLineDash();
+            this.context.setLineDash([20, 5]);
+            this.context.moveTo(midPos.x, midPos.y);
+            this.context.lineTo(markerPos.x, markerPos.y);
+            this.context.stroke(); 
+            this.context.setLineDash(exLd);
+
             let endIndex = drawGraphProgressive(preRenderContext, this.graph.points, this.fromIndex, this.inRev);
             this.fromIndex = endIndex;
             this.context.drawImage(preRenderCanvas, 0, 0);
