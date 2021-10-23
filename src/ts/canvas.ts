@@ -207,20 +207,13 @@ function drawGraphProgressive(
     context.beginPath();
     context.moveTo(points[fromIndex].point.x, points[fromIndex].point.y);
     let endIndex = fromIndex;
-    let lastDraw = false;
     for (let idx = fromIndex; idx < points.length; idx++) {
         let currPoint = points[idx];
         if (currPoint.rev > toRev) {
             break;
         }
-        if (idx == (points.length - 1)) {
-            lastDraw = true;
-        }
         context.lineTo(currPoint.point.x, currPoint.point.y);
         endIndex = idx;
-    }
-    if (lastDraw) {
-        // context.lineTo(points[0].point.x, points[0].point.y);
     }
     context.stroke();
 
