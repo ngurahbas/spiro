@@ -30,7 +30,6 @@ export class CanvasController {
     }
 
     startPopulate(withLimit: boolean = true) {
-        console.log("startPopulate");
         this.graph = { currentRev: 0, points: [] };
 
         let calculateGraphInterval: ReturnType<typeof setInterval>;
@@ -51,7 +50,6 @@ export class CanvasController {
             }
 
             if (this.graph.currentRev >= this.numOfRotation) {
-                console.log("startPopulate ended ", this.graph.currentRev, this.numOfRotation);
                 clearInterval(calculateGraphInterval)
             }
         };
@@ -81,7 +79,6 @@ export class CanvasController {
 
     startAnimation(spiro: Spiro) {
         this.setSpiro(spiro);
-        console.log("animationInt", this.animationInt);
         this.startPopulate();
 
         let preRenderCanvas = document.createElement("canvas");
@@ -92,7 +89,6 @@ export class CanvasController {
         this.fromIndex = 0;
         this.inRev = 0;
 
-        console.log("animation start");
         let animate = (timeStamp: DOMHighResTimeStamp) => {
             clear(this.context, this.spiro.canvasWidth, this.spiro.canvasWidth);
             if (!this.startTime) {
