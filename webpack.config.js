@@ -35,6 +35,9 @@ module.exports = {
         filename: '[name].bundle.js',
         clean: true,
     },
+    optimization: {
+        runtimeChunk: 'single'
+    },
     plugins: [
         new HtmlWebpackPlugin({
             template: './src/html/index.html',
